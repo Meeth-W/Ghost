@@ -1,7 +1,9 @@
+import bloodHelper from "./bloodHelper";
+import bloodSplits from "./bloodSplits";
 import slotBinding from "./slotBinding";
 
 export const modules = [
-    slotBinding
+    slotBinding, bloodHelper, bloodSplits
 ]
 
 export function refresh_modules() {

@@ -61,7 +61,58 @@ defConfig
     description: "Changes the default Slot Binding Overlay Color.",
     value: [255, 255, 255, 255],
 })
-
+.addSwitch({
+    category: "Blood Helper",
+    configName: "bloodHelperToggle",
+    title: "&cToggle Blood Helper",
+    description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.",
+})
+.addColorPicker({
+    category: "Blood Helper",
+    configName: "bloodHelperColor",
+    title: "Helper Color",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: ""
+})
+.addSwitch({
+    category: "Blood Helper",
+    configName: "bloodHelperDynamicColor",
+    title: "Toggle Dynamic Color",
+    description: "Automatically decides the color of your blood helper.",
+    subcategory: "Colors",
+})
+.addColorPicker({
+    category: "Blood Helper",
+    configName: "bloodHelperInitialColor",
+    title: "Initial Color",
+    description: "",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors"
+})
+.addColorPicker({
+    category: "Blood Helper",
+    configName: "bloodHelperSecondaryColor",
+    title: "Secondary Color",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: "",
+})
+.addColorPicker({
+    category: "Blood Helper",
+    configName: "bloodHelperFinalColor",
+    title: "Final Color",
+    value: [255, 255, 255, 255],
+    description: "",
+    subcategory: "Colors"
+})
+.addSwitch({
+    category: "Blood Helper",
+    configName: "watcherMoveDisplay",
+    title: "Watcher Move Display",
+    description: "Shows when watcher is about to move.",
+    subcategory: "Display",
+})
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§cGhost Client")
 .setPos(10, 10)

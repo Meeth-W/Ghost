@@ -9,8 +9,8 @@ export const prefix = "§8[&6Ghost&8]§7"
  * @returns 
  */
 export const chat = (message, chatLineID = null) => {
-    if (!chatLineID) return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`));
-    return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`)).setChatLineId(chatLineID)
+    if (!chatLineID) return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`)).chat();
+    return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`)).setChatLineId(chatLineID).chat();
 }
 
 const Color = Java.type("java.awt.Color");

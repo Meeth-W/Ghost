@@ -9,7 +9,7 @@ export const prefix = "§8[&6Ghost&8]§7"
  * @returns 
  */
 export const chat = (message, chatLineID = null) => {
-    if (!id) return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`));
+    if (!chatLineID) return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`));
     return new Message(new TextComponent(`${prefix} ${message}`).setHover('show_text', `&7bOoOo`)).setChatLineId(chatLineID)
 }
 

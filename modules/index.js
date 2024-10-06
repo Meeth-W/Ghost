@@ -1,7 +1,7 @@
-
+import slotBinding from "./slotBinding";
 
 export const modules = [
-
+    slotBinding
 ]
 
 export function refresh_modules() {

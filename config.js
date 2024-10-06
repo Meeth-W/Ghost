@@ -10,7 +10,7 @@ defConfig
 .addSwitch({
     category: "General",
     configName: "toggle",
-    title: "&5&lToggle Ghost Client",
+    title: "&4&lToggle Ghost Client",
     description: "Decides whether all features of this mod are &aenabled&7/&cdisabled&7.",
     registerListener(previousvalue, newvalue) {
         ChatLib.chat(`§8[&6Ghost&8]§7 Ghost Client ${newvalue ? "&aEnabled" : "&cDisabled"}`)

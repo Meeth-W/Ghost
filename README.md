@@ -12,3 +12,4 @@ A Hypixel Skyblock QOL Mod
 - Party Finder
 - Positional Messages
 - Relic / Crystal  Timers
+- Slot Binding ✅

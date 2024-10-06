@@ -1,0 +1,13 @@
+{
+    "name": "Ghost",
+    "creator": "Ghostyy",
+    "version": "1.0.1",
+    "description": "Dungeons QOL.",
+    "entry": "index.js",
+    "requires": [
+      "Amaterasu", 
+      "requestV2",
+      "BloomCore",
+      "RenderLib"
+    ]
+  }

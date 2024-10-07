@@ -113,6 +113,198 @@ defConfig
     description: "Shows when watcher is about to move.",
     subcategory: "Display",
 })
+.addSwitch({
+    category: "Drag Prio",
+    configName: "dragPrioToggle",
+    title: "&cToggle Drag Prio",
+    description: "Decides wether all features in Drag Prio are &aenabled&7/&cdisabled&7.",
+})
+.addSlider({
+    category: "Drag Prio",
+    configName: "splitPower",
+    title: "Set Power",
+    description: "Set the power that you split on",
+    options: [0, 32],
+    value: 0,
+    subcategory: "Settings"
+})
+.addSlider({
+    category: "Drag Prio",
+    configName: "easyPower",
+    title: "Set Easy Power",
+    description: "Set the power that you split on for easy drags (O/P/G)",
+    options: [0, 32],
+    value: 0,
+    subcategory: "Settings"
+})
+.addSwitch({
+    category: "Drag Prio",
+    configName: "showSingleDragons",
+    title: "Show Non-Split drags",
+    description: "Display \"X Dragon is spawning!\" on non-split drags",
+    subcategory: "Settings",
+})
+.addDropDown({
+    category: "Drag Prio",
+    configName: "healerNormal",
+    title: "Healer",
+    description: "Set the team the healer will go with",
+    options: ["Arch Team","Bers Team"],
+    value: 0,
+    subcategory: "Normal Teams"
+})
+.addDropDown({
+    category: "Drag Prio",
+    configName: "tankNormal",
+    title: "Tank",
+    description: "Set the team the tank will go with",
+    options: ["Arch Team","Bers Team"],
+    value: 0,
+    subcategory: "Normal Teams"
+})
+.addDropDown({
+    category: "Drag Prio",
+    configName: "healerPurp",
+    title: "Healer",
+    description: "Set the team the healer will go with when purple",
+    options: ["Arch Team","Bers Team"],
+    value: 0,
+    subcategory: "Purple Teams"
+})
+.addDropDown({
+    category: "Drag Prio",
+    configName: "tankPurp",
+    title: "Tank",
+    description: "Set the team the tank will go with when purple",
+    options: ["Arch Team","Bers Team"],
+    value: 0,
+    subcategory: "Purple Teams"
+})
+.addSwitch({
+    category: "Timers",
+    configName: "timerToggle",
+    title: "&cToggle Timers",
+    description: "Decides wether all features in Timers are &aenabled&7/&cdisabled&7.",
+})
+.addSwitch({
+    category: "Timers",
+    configName: "relicTimerToggle",
+    title: "Relic Timer",
+    description: "Displays a countdown as relic spawns.",
+    subcategory: "Toggles"
+})
+.addSwitch({
+    category: "Timers",
+    configName: "crystalTimerToggle",
+    title: "Crystal Timer",
+    description: "Displays a countdown as crystals spawns.",
+    subcategory: "Toggles"
+})
+.addSwitch({
+    category: "Timers",
+    configName: "invincibilityTimerToggle",
+    title: "Invinicbility Timer",
+    description: "Displays a timer when a mask/phoenix proc's.",
+    subcategory: "Toggles"
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "locationMessagesToggle",
+    title: "&cToggle Location Pings",
+    description: "Decides wether all features in Location Pings are &aenabled&7/&cdisabled&7.",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "locationNotif",
+    title: "Alert Toggle",
+    description: "Shows a title and plays a sound when a party member sends a location message",
+    subcategory: "Location Title",
+})
+.addTextInput({
+    category: "Location Pings",
+    configName: "locationSound",
+    title: "Location Notification Sound",
+    description: "Sound used for Location Notification Sound",
+    value: "note.harp",
+    placeHolder: "note.harp",
+    subcategory: "Location Title",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "ssCoord",
+    title: "SS Nearby Message",
+    subcategory: "Toggle",
+    description: "",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "pre2Coord",
+    title: "Pre Enter 2 Nearby Message",
+    subcategory: "Toggle",
+    description: "",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "i3Coord",
+    title: "Insta 3 Nearby Message",
+    subcategory: "Toggle",
+    description: "",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "pre3Coord",
+    title: "Pre Enter 3 Nearby Message",
+    subcategory: "Toggle",
+    description: "",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "pre4Coord",
+    title: "Pre Enter 4 Nearby Message",
+    subcategory: "Toggle",
+    description: "",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "slingshotCoord",
+    title: "At Core Message",
+    subcategory: "Toggle",
+    description: "",
+})
+.addSwitch({
+    category: "Location Pings",
+    configName: "tunnelCoord",
+    title: "Inside Tunnel Message",
+    subcategory: "Toggle",
+    description: "",
+})
+// .addSwitch({
+//     category: "Terminals",
+//     configName: "termToggle",
+//     title: "&cToggle Terminals",
+//     description: "Decides wether all features in Terminals are &aenabled&7/&cdisabled&7.",
+// })
+// .addSwitch({
+//     category: "Terminals",
+//     configName: "autoMelody",
+//     title: "Auto Melody",
+//     description: "Automatically does the melody terminal for you.\n&bCredits: Soshimee/Cyan",
+//     subcategory: "Melody",
+// })
+// .addSwitch({
+//     category: "Terminals",
+//     configName: "autoMelodySkip",
+//     title: "Auto Melody Skip",
+//     description: "Attempts to skip at the first and fifth positions",
+//     subcategory: "Melody",
+// })
+// .addSwitch({
+//     category: "Terminals",
+//     configName: "forceP3",
+//     title: "Force P3",
+//     description: "Bypasses the Phase 3 Checks.",
+//     subcategory: "Melody",
+// })
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§cGhost Client")
 .setPos(10, 10)

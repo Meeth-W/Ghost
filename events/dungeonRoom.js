@@ -1,4 +1,4 @@
-// Credits: ghostaddons
+// Credits: Soshimee Addons
 
 import Dungeon from "../../BloomCore/dungeons/Dungeon";
 

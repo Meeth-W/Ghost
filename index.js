@@ -1,3 +1,4 @@
+import config from "./config";
 import { refresh_modules } from "./modules";
 import { data } from "./utils/data";
 

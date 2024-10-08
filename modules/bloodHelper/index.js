@@ -71,12 +71,6 @@ const renderTrigger = register("renderWorld", () => {
 			else RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperFinalColor).getRed()/255, getColor(config().bloodHelperFinalColor).getGreen()/255, getColor(config().bloodHelperFinalColor).getBlue()/255, getColor(config().bloodHelperFinalColor)/255, true);
 		}
 		Tessellator.drawString(((progress * v.ticks / 20)*10).toFixed(1), v.final[0], v.final[1] + 1.5, v.final[2]);
-        if ((progress * v.ticks / 20).toFixed(2) <= 0.2 && (progress * v.ticks / 20).toFixed(2) >= (2 - 2.5)/10) {
-            if (pinging) return
-            pinging = true
-            World.playSound('note.harp', 2, 2);
-            setTimeout(() => { pinging = false }, 150);
-        }
 		if (v.entity.isDead()) delete entities[k];
 	}
 }).unregister();

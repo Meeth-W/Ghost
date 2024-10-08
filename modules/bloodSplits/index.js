@@ -27,7 +27,7 @@ const trigger = register("chat", (message) => {
 
 const tickCounter = register('packetReceived', () => {
     bloodStartTicks++
-    if (bloodStartTicks >= 40) tickCounter.unregister();
+    if (bloodStartTicks >= 40*20) tickCounter.unregister();
 }).setFilteredClass(S32PacketConfirmTransaction).unregister();
 
 const mainTrigger = register("chat", () => {

@@ -307,8 +307,8 @@ defConfig
 // })
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§cGhost Client")
-.setPos(10, 10)
-.setSize(80, 80)
+.setPos(15, 15)
+.setSize(70, 70)
 .apply()
 .setCommand("gh", ["ghost", "ghostclient"])
 .onCloseGui(() => {

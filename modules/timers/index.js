@@ -34,7 +34,7 @@ const procCatch = register("packetReceived", (packet, event) => {
 const renderTrigger = register('renderOverlay', () => {
     if (!ticks) return;
     const displayColor = (ticks > 40)? "&a" : (ticks > 20)? "&e": "&c";
-    Client.Companion.showTitle((displayText)? displayText: " ", `&7Invincible for &${displayColor}${(ticks/20).toFixed(2)}s`, 0, 2, 0)
+    Client.Companion.showTitle((displayText)? displayText: " ", `&7Invincible for ${displayColor}${(ticks/20).toFixed(2)}s`, 0, 2, 0)
 }).unregister();
 
 let crystalTicks = null

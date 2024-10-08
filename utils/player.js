@@ -21,6 +21,7 @@ export default class playerData {
             accessories: { magical_power: null, reforge: null },
             level: { experience: null, level: null, rank: null },
             slayer: { spider: {level: null, experience: null, kills: {t1: null, t2: null, t3: null, t4: null, total: null}}, zombie: {level: null, experience: null, kills: {t1: null, t2: null, t3: null, t4: null, total: null}}, wolf: {level: null, experience: null, kills: {t1: null, t2: null, t3: null, t4: null, total: null}}, enderman: {level: null, experience: null, kills: {t1: null, t2: null, t3: null, t4: null, total: null}}, blaze: {level: null, experience: null, kills: {t1: null, t2: null, t3: null, t4: null, total: null}}, vampire: {level: null, experience: null, kills: {t1: null, t2: null, t3: null, t4: null, t5: null, total: null}} },
+            gear: {armour: []}
         };
     }
 
@@ -50,6 +51,9 @@ export default class playerData {
                     magical_power: profile?.data?.accessories?.magical_power?.total,
                     reforge: profile?.raw?.accessory_bag_storage?.selected_power
                 };
+                this.data.gear = {
+                    armour: profile?.data?.items?.armor?.armor
+                }
             };
             this.data.level = {
                 experience: profile?.data?.skyblock_level?.xp,

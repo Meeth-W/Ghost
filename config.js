@@ -2,7 +2,7 @@ import Settings from "../Amaterasu/core/Settings"
 import DefaultConfig from "../Amaterasu/core/DefaultConfig"
 
 import { data } from "./utils/data";
-export let recently_closed = Cfalse;
+export let recently_closed = false;
 
 const defConfig = new DefaultConfig("Ghost", "data/settings.json")
 

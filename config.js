@@ -2,7 +2,7 @@ import Settings from "../Amaterasu/core/Settings"
 import DefaultConfig from "../Amaterasu/core/DefaultConfig"
 
 import { data } from "./utils/data";
-export let recently_closed = false;
+export let recently_closed = Cfalse;
 
 const defConfig = new DefaultConfig("Ghost", "data/settings.json")
 
@@ -65,7 +65,7 @@ defConfig
     category: "Blood Helper",
     configName: "bloodHelperToggle",
     title: "&bToggle Blood Helper",
-    description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.\n\n&bBlood Helper Credit: soshimee addons",
+    description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.\n\n&9Blood Helper Credit: &7soshimeeaddons",
 })
 .addColorPicker({
     category: "Blood Helper",

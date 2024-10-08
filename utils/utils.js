@@ -166,3 +166,61 @@ export const inRange = (arr) => {
     }
     return false
 }
+
+/**
+ * Capitalize a string.
+ * @param {String} str String to modify
+ * @returns String
+ */
+export function capitalize(str) {
+    if (!str) return str; 
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+/**
+ * Returns an abbreviated string.
+ * @param {Integer} num 
+ * @returns String
+ */
+export function abbreviateNumber(num) {
+    if (num >= 1e12) {
+        return (num / 1e12).toFixed(1).replace(/\.0$/, '') + 'T'; // Trillions
+    } else if (num >= 1e9) {
+        return (num / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';  // Billions
+    } else if (num >= 1e6) {
+        return (num / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';  // Millions
+    } else {
+        return num.toString(); // Less than 1 million
+    }
+}
+
+/**
+ * Format's a number
+ * @param {Number} num 
+ * @returns String
+ */
+export function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export const isBetween = (number, [a, b]) => number >= a && number <= b
+export const sbLevelsPrefix = {
+    "&7": [1, 39],
+    "&f": [40, 79],
+    "&e": [80, 119],
+    "&a": [120, 159],
+    "&2": [160, 199],
+    "&b": [200, 239],
+    "&3": [240, 279],
+    "&9": [280, 319],
+    "&d": [320, 359],
+    "&5": [360, 399],
+    "&6": [400, 439],
+    "&c": [440, 479]
+}
+/**
+ * Gets the skyblock level color
+ * @param {Number} number Skyblock Level
+ * @returns String
+ */
+export const getSbLevelPrefix = (number) => Object.keys(sbLevelsPrefix).filter(pref => isBetween(number, sbLevelsPrefix[pref]))

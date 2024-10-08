@@ -1,0 +1,85 @@
+import { calcSkillLevel, convertToPBTime } from '../../../BloomCore/utils/Utils';
+import config from '../../config';
+import playerData from '../../utils/player';
+import { abbreviateNumber, capitalize, chat, formatNumber, getSbLevelPrefix } from '../../utils/utils';
+
+const chatTrigger = register('chat', (username, _, __) => {
+    const player = new playerData(username);
+    player.init().then(() => {
+        World.playSound('note.pling', '2', '1');
+        player.getData().then(() => {
+            let msg = null;
+            if (!player.data.apiStatus) {
+                msg = new Message(
+                    new TextComponent(`§8[&6Ghost&8]§7 `).setHover('show_text', '&7BooOo'),
+                    new TextComponent(`&8[${getSbLevelPrefix(player.data.level.level)}${player.data.level.level}&8] &6${player.player.username} `).setHover('show_text', `&6Experience\n&7${player.data.level.experience} &8#${player.data.level.rank}`),
+                    new TextComponent(`&c${player.data.dungeons.experience.catacombs.level} &f| `).setHover('show_text', `&6Catacombs Experience\n&7${formatNumber(parseInt(player.data.dungeons.experience.catacombs.experience).toFixed(2))} &8#${player.data.dungeons.experience.catacombs.rank}`),
+                    new TextComponent(`&a${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)} &f| `).setHover('show_text', `&6Bonzo: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f1)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m1)}\n&6Scarf: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f2)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m2)}\n&6Professor: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f3)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m3)}\n&6Thorn: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f4)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m4)}\n&6Livid: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f5)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m5)}\n&6Sadan: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f6)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m6)}\n&6Necron: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f7)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)}`),
+                    new TextComponent(`&7${formatNumber(parseInt(player.data.dungeons.secrets))} &f| `).setHover(`show_text`, `&6Secret Count\n&7${parseFloat(parseFloat(player.data.dungeons.secrets)/parseInt(player.data.dungeons.completions.total)).toFixed(2)} &8SPR`),
+                    new TextComponent(`&b${capitalize(player.data.dungeons.selected_class)} &f| `).setHover(`show_text`, `&6Class Experience\n&6${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Archer.experience)} | ➶\n&c${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Berserk.experience)} | ☄\n&a${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Tank.experience)} | ⚓\n&b${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Mage.experience)} | ⚡\n&d${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Healer.experience)} | ⚚\n&6Class Average: &7${player.data.dungeons.experience.classes.Average.level}`),
+                    new TextComponent(`&6${abbreviateNumber(parseInt(player.data.networth.total))} &f| `).setHover(`show_text`, `&6Unsoulbound: &7${abbreviateNumber(parseInt(player.data.networth.unsoulbound))}\n&6Purse: &7${abbreviateNumber(parseInt(player.data.networth.purse))}\n&6Bank: &7${abbreviateNumber(parseInt(player.data.networth.bank))}`),
+                    new TextComponent(`&e${formatNumber(player.data.accessories.magical_power)} &f| `).setHover(`show_text`, `&6Magical Power\n&7${capitalize(player.data.accessories.reforge)}`),
+                    new TextComponent(`&d⚔`).setHover('show_text', `&6Revenant: &7${player.data.slayer.zombie.level} &8${formatNumber(player.data.slayer.zombie.experience)}\n&6Tarantula: &7${player.data.slayer.spider.level} &8${formatNumber(player.data.slayer.spider.experience)}\n&6Sven: &7${player.data.slayer.wolf.level} &8${formatNumber(player.data.slayer.wolf.experience)}\n&6Voidgloom: &7${player.data.slayer.enderman.level} &8${formatNumber(player.data.slayer.enderman.experience)}\n&6Inferno Demonlord: &7${player.data.slayer.blaze.level} &8${formatNumber(player.data.slayer.blaze.experience)}\n&6Riftstalker: &7${player.data.slayer.vampire.level} &8${formatNumber(player.data.slayer.vampire.experience)}\n`)
+                );
+            } else {
+                msg = new Message(
+                    new TextComponent(`§8[&6Ghost&8]§7 `).setHover('show_text', '&7BooOo'),
+                    new TextComponent(`&8[${getSbLevelPrefix(player.data.level.level)}${player.data.level.level}&8] &6${player.player.username} `).setHover('show_text', `&6Experience\n&7${player.data.level.experience} &8#${player.data.level.rank}`),
+                    new TextComponent(`&c${player.data.dungeons.experience.catacombs.level} &f| `).setHover('show_text', `&6Catacombs Experience\n&7${formatNumber(parseInt(player.data.dungeons.experience.catacombs.experience).toFixed(2))} &8#${player.data.dungeons.experience.catacombs.rank}`),
+                    new TextComponent(`&a${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)} &f| `).setHover('show_text', `&6Bonzo: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f1)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m1)}\n&6Scarf: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f2)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m2)}\n&6Professor: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f3)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m3)}\n&6Thorn: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f4)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m4)}\n&6Livid: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f5)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m5)}\n&6Sadan: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f6)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m6)}\n&6Necron: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f7)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)}`),
+                    new TextComponent(`&7${formatNumber(parseInt(player.data.dungeons.secrets))} &f| `).setHover(`show_text`, `&6Secret Count\n&7${parseFloat(parseFloat(player.data.dungeons.secrets)/parseInt(player.data.dungeons.completions.total)).toFixed(2)} &8SPR`),
+                    new TextComponent(`&b${capitalize(player.data.dungeons.selected_class)} &f| `).setHover(`show_text`, `&6Class Experience\n&6${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Archer.experience)} | ➶\n&c${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Berserk.experience)} | ☄\n&a${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Tank.experience)} | ⚓\n&b${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Mage.experience)} | ⚡\n&d${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Healer.experience)} | ⚚\n&6Class Average: &7${player.data.dungeons.experience.classes.Average.level}`),
+                    new TextComponent(`&cNO API &f| `).setHover(`show_text`, `&7No Networth | Magical Power Data.`),
+                    new TextComponent(`&d⚔`).setHover('show_text', `&6Revenant: &7${player.data.slayer.zombie.level} &8${formatNumber(player.data.slayer.zombie.experience)}\n&6Tarantula: &7${player.data.slayer.spider.level} &8${formatNumber(player.data.slayer.spider.experience)}\n&6Sven: &7${player.data.slayer.wolf.level} &8${formatNumber(player.data.slayer.wolf.experience)}\n&6Voidgloom: &7${player.data.slayer.enderman.level} &8${formatNumber(player.data.slayer.enderman.experience)}\n&6Inferno Demonlord: &7${player.data.slayer.blaze.level} &8${formatNumber(player.data.slayer.blaze.experience)}\n&6Riftstalker: &7${player.data.slayer.vampire.level} &8${formatNumber(player.data.slayer.vampire.experience)}\n`)
+                );
+            };
+            msg.chat()
+        })
+    })
+}).setCriteria("Party Finder > ${username} joined the dungeon group! (${_} Level ${__})").unregister();
+
+register('command', (username) => {
+    if (!username) username = Player.getName();
+    const player = new playerData(username);
+    player.init().then(() => {
+        player.getData().then(() => {
+            let msg = null;
+            if (!player.data.apiStatus) {
+                msg = new Message(
+                    new TextComponent(`§8[&6Ghost&8]§7 `).setHover('show_text', '&7BooOo'),
+                    new TextComponent(`&8[${getSbLevelPrefix(player.data.level.level)}${player.data.level.level}&8] &6${player.player.username} `).setHover('show_text', `&6Experience\n&7${player.data.level.experience} &8#${player.data.level.rank}`),
+                    new TextComponent(`&c${player.data.dungeons.experience.catacombs.level} &f| `).setHover('show_text', `&6Catacombs Experience\n&7${formatNumber(parseInt(player.data.dungeons.experience.catacombs.experience).toFixed(2))} &8#${player.data.dungeons.experience.catacombs.rank}`),
+                    new TextComponent(`&a${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)} &f| `).setHover('show_text', `&6Bonzo: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f1)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m1)}\n&6Scarf: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f2)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m2)}\n&6Professor: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f3)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m3)}\n&6Thorn: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f4)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m4)}\n&6Livid: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f5)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m5)}\n&6Sadan: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f6)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m6)}\n&6Necron: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f7)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)}`),
+                    new TextComponent(`&7${formatNumber(parseInt(player.data.dungeons.secrets))} &f| `).setHover(`show_text`, `&6Secret Count\n&7${parseFloat(parseFloat(player.data.dungeons.secrets)/parseInt(player.data.dungeons.completions.total)).toFixed(2)} &8SPR`),
+                    new TextComponent(`&b${capitalize(player.data.dungeons.selected_class)} &f| `).setHover(`show_text`, `&6Class Experience\n&6${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Archer.experience)} | ➶\n&c${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Berserk.experience)} | ☄\n&a${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Tank.experience)} | ⚓\n&b${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Mage.experience)} | ⚡\n&d${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Healer.experience)} | ⚚\n&6Class Average: &7${player.data.dungeons.experience.classes.Average.level}`),
+                    new TextComponent(`&6${abbreviateNumber(parseInt(player.data.networth.total))} &f| `).setHover(`show_text`, `&6Unsoulbound: &7${abbreviateNumber(parseInt(player.data.networth.unsoulbound))}\n&6Purse: &7${abbreviateNumber(parseInt(player.data.networth.purse))}\n&6Bank: &7${abbreviateNumber(parseInt(player.data.networth.bank))}`),
+                    new TextComponent(`&e${formatNumber(player.data.accessories.magical_power)} &f| `).setHover(`show_text`, `&6Magical Power\n&7${capitalize(player.data.accessories.reforge)}`),
+                    new TextComponent(`&d⚔`).setHover('show_text', `&6Revenant: &7${player.data.slayer.zombie.level} &8${formatNumber(player.data.slayer.zombie.experience)}\n&6Tarantula: &7${player.data.slayer.spider.level} &8${formatNumber(player.data.slayer.spider.experience)}\n&6Sven: &7${player.data.slayer.wolf.level} &8${formatNumber(player.data.slayer.wolf.experience)}\n&6Voidgloom: &7${player.data.slayer.enderman.level} &8${formatNumber(player.data.slayer.enderman.experience)}\n&6Inferno Demonlord: &7${player.data.slayer.blaze.level} &8${formatNumber(player.data.slayer.blaze.experience)}\n&6Riftstalker: &7${player.data.slayer.vampire.level} &8${formatNumber(player.data.slayer.vampire.experience)}\n`)
+                );
+            } else {
+                msg = new Message(
+                    new TextComponent(`§8[&6Ghost&8]§7 `).setHover('show_text', '&7BooOo'),
+                    new TextComponent(`&8[${getSbLevelPrefix(player.data.level.level)}${player.data.level.level}&8] &6${player.player.username} `).setHover('show_text', `&6Experience\n&7${player.data.level.experience} &8#${player.data.level.rank}`),
+                    new TextComponent(`&c${player.data.dungeons.experience.catacombs.level} &f| `).setHover('show_text', `&6Catacombs Experience\n&7${formatNumber(parseInt(player.data.dungeons.experience.catacombs.experience).toFixed(2))} &8#${player.data.dungeons.experience.catacombs.rank}`),
+                    new TextComponent(`&a${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)} &f| `).setHover('show_text', `&6Bonzo: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f1)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m1)}\n&6Scarf: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f2)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m2)}\n&6Professor: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f3)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m3)}\n&6Thorn: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f4)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m4)}\n&6Livid: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f5)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m5)}\n&6Sadan: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f6)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m6)}\n&6Necron: &7${convertToPBTime(player.data.dungeons.best_runs.catacombs.f7)} | ${convertToPBTime(player.data.dungeons.best_runs.master_catacombs.m7)}`),
+                    new TextComponent(`&7${formatNumber(parseInt(player.data.dungeons.secrets))} &f| `).setHover(`show_text`, `&6Secret Count\n&7${parseFloat(parseFloat(player.data.dungeons.secrets)/parseInt(player.data.dungeons.completions.total)).toFixed(2)} &8SPR`),
+                    new TextComponent(`&b${capitalize(player.data.dungeons.selected_class)} &f| `).setHover(`show_text`, `&6Class Experience\n&6${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Archer.experience)} | ➶\n&c${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Berserk.experience)} | ☄\n&a${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Tank.experience)} | ⚓\n&b${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Mage.experience)} | ⚡\n&d${calcSkillLevel('catacombs', player.data.dungeons.experience.classes.Healer.experience)} | ⚚\n&6Class Average: &7${player.data.dungeons.experience.classes.Average.level}`),
+                    new TextComponent(`&cNO API &f| `).setHover(`show_text`, `&7No Networth | Magical Power Data.`),
+                    new TextComponent(`&d⚔`).setHover('show_text', `&6Revenant: &7${player.data.slayer.zombie.level} &8${formatNumber(player.data.slayer.zombie.experience)}\n&6Tarantula: &7${player.data.slayer.spider.level} &8${formatNumber(player.data.slayer.spider.experience)}\n&6Sven: &7${player.data.slayer.wolf.level} &8${formatNumber(player.data.slayer.wolf.experience)}\n&6Voidgloom: &7${player.data.slayer.enderman.level} &8${formatNumber(player.data.slayer.enderman.experience)}\n&6Inferno Demonlord: &7${player.data.slayer.blaze.level} &8${formatNumber(player.data.slayer.blaze.experience)}\n&6Riftstalker: &7${player.data.slayer.vampire.level} &8${formatNumber(player.data.slayer.vampire.experience)}\n`)
+                );
+            };
+            World.playSound('note.pling', '2', '1');
+            msg.chat()
+        })
+    })
+}).setName('nicepb').setAliases('stats')
+
+export function toggle() {
+    if (config().partyFinderToggle && config().toggle) {
+        chatTrigger.register();
+        return
+    }
+    chatTrigger.unregister()
+    return
+}
+export default { toggle };

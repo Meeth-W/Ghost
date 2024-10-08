@@ -1,5 +1,4 @@
 import request from "../../requestV2";
-import config from "../config";
 import { chat } from "./utils";
 
 export default class playerData {
@@ -11,11 +10,11 @@ export default class playerData {
         }
         this.data = {
             apiStatus: false,
-            networth: { total: null, soulbound: null, purse: null, bank: null },
+            networth: { total: null, unsoulbound: null, purse: null, bank: null },
             dungeons: {
                 best_runs: { catacombs: {f1: 0, f2: 0, f3: 0, f4: 0, f5: 0, f6: 0, f7: 0}, master_catacombs: {m1: 0, m2: 0, m3: 0, m4: 0, m5: 0, m6: 0, m7: 0} },
                 completions: { catacombs: {f1: 0, f2: 0, f3: 0, f4: 0, f5: 0, f6: 0, f7: 0}, master_catacombs: {m1: 0, m2: 0, m3: 0, m4: 0, m5: 0, m6: 0, m7: 0}, total: null },
-                experience: { catacombs: {experience: null, level: null, rank: null}, classes: {Mage: {experience: null, level: null}, Archer: {experience: null, level: null}, Berserk: {experience: null, level: null}, Tank: {experience: null, level: null}, Healer: {experience: null, level: null}} },
+                experience: { catacombs: {experience: null, level: null, rank: null}, classes: {Mage: {experience: null, level: null}, Archer: {experience: null, level: null}, Berserk: {experience: null, level: null}, Tank: {experience: null, level: null}, Healer: {experience: null, level: null}, Average: {experience: null, level: null} }},
                 secrets: null,
                 selected_class: null,
             },
@@ -27,23 +26,23 @@ export default class playerData {
 
     init() {
         return request({url: `https://api.mojang.com/users/profiles/minecraft/${this.player.username}`, headers: {'User-Agent': ' Mozilla/5.0', 'Content-Type': 'application/json'}, json: true}).then(data => {
-            if (!data.id) return chat(`&cError at &7api.mojang.com&c: ${data.errorMessage}`);
+            if (!data.id) return chat(`&cError at api.mojang.com&c: ${data.errorMessage}`);
             this.player.uuid = data.id;
             this.player.username = data.name;
             return;
-        }).catch(e => chat(`&cError at &7api.mojang.com&c: ${e}`))
+        }).catch(e => chat(`&cError at api.mojang.com&c: ${e}`))
     }
 
     getData() {
         return request({url: `https://sky.shiiyu.moe/api/v2/profile/${this.player.uuid}`, headers: {'User-Agent': ' Mozilla/5.0', 'Content-Type': 'application/json'}, json: true}).then(data => {
-            if (data.error) return chat(`&cError at &7sky.shiiyu.moe&c: ${data.error}`);
+            if (data.error) return chat(`&cError at sky.shiiyu.moe&c: ${data.error}`);
             const profile = Object.values(data.profiles).find(profile => profile.current === true)
             
             this.data.apiStatus = profile?.data?.networth?.noInventory;
-            if (this.data.apiStatus) {
+            if (!this.data.apiStatus) {
                 this.data.networth = {
                     total: profile?.data?.networth?.networth,
-                    soulbound: profile?.data?.networth?.soulbound,
+                    unsoulbound: profile?.data?.networth?.unsoulboundNetworth,
                     purse: profile?.data?.networth?.purse,
                     bank: profile?.data?.networth?.bank
                 };
@@ -62,66 +61,66 @@ export default class playerData {
                     level: profile?.data?.slayer?.slayers?.spider?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.spider?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.spider?.level?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.spider?.level?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.spider?.level?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.spider?.level?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.spider?.level?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.spider?.kills["1"],
+                        t2: profile?.data?.slayer?.slayers?.spider?.kills["2"],
+                        t3: profile?.data?.slayer?.slayers?.spider?.kills["3"],
+                        t4: profile?.data?.slayer?.slayers?.spider?.kills["4"],
+                        total: profile?.data?.slayer?.slayers?.spider?.kills["total"],
                     }
                 },
                 zombie: {
                     level: profile?.data?.slayer?.slayers?.zombie?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.zombie?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.zombie?.level?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.zombie?.level?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.zombie?.level?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.zombie?.level?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.zombie?.level?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.zombie?.kills["1"],
+                        t2: profile?.data?.slayer?.slayers?.zombie?.kills["2"],
+                        t3: profile?.data?.slayer?.slayers?.zombie?.kills["3"],
+                        t4: profile?.data?.slayer?.slayers?.zombie?.kills["4"],
+                        total: profile?.data?.slayer?.slayers?.zombie?.kills["total"],
                     }
                 },
                 wolf: {
                     level: profile?.data?.slayer?.slayers?.wolf?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.wolf?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.wolf?.level?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.wolf?.level?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.wolf?.level?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.wolf?.level?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.wolf?.level?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.wolf?.kills["1"],
+                        t2: profile?.data?.slayer?.slayers?.wolf?.kills["2"],
+                        t3: profile?.data?.slayer?.slayers?.wolf?.kills["3"],
+                        t4: profile?.data?.slayer?.slayers?.wolf?.kills["4"],
+                        total: profile?.data?.slayer?.slayers?.wolf?.kills["total"],
                     }
                 },
                 enderman: {
                     level: profile?.data?.slayer?.slayers?.enderman?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.enderman?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.enderman?.level?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.enderman?.level?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.enderman?.level?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.enderman?.level?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.enderman?.level?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.enderman?.kills["1"],
+                        t2: profile?.data?.slayer?.slayers?.enderman?.kills["2"],
+                        t3: profile?.data?.slayer?.slayers?.enderman?.kills["3"],
+                        t4: profile?.data?.slayer?.slayers?.enderman?.kills["4"],
+                        total: profile?.data?.slayer?.slayers?.enderman?.kills["total"],
                     }
                 },
                 blaze: {
                     level: profile?.data?.slayer?.slayers?.blaze?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.blaze?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.blaze?.level?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.blaze?.level?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.blaze?.level?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.blaze?.level?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.blaze?.level?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.blaze?.kills["1"],
+                        t2: profile?.data?.slayer?.slayers?.blaze?.kills["2"],
+                        t3: profile?.data?.slayer?.slayers?.blaze?.kills["3"],
+                        t4: profile?.data?.slayer?.slayers?.blaze?.kills["4"],
+                        total: profile?.data?.slayer?.slayers?.blaze?.kills["total"],
                     }
                 },
                 vampire: {
                     level: profile?.data?.slayer?.slayers?.vampire?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.vampire?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.vampire?.level?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.vampire?.level?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.vampire?.level?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.vampire?.level?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.vampire?.level?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.vampire?.kills["1"],
+                        t2: profile?.data?.slayer?.slayers?.vampire?.kills["2"],
+                        t3: profile?.data?.slayer?.slayers?.vampire?.kills["3"],
+                        t4: profile?.data?.slayer?.slayers?.vampire?.kills["4"],
+                        total: profile?.data?.slayer?.slayers?.vampire?.kills["total"],
                     }
                 }
             }
@@ -149,22 +148,22 @@ export default class playerData {
                 },
                 best_runs: {
                     catacombs: {
-                        f1: profile?.data?.dungeons?.catacombs?.floors["1"]?.stats?.fastest_time_s,
-                        f2: profile?.data?.dungeons?.catacombs?.floors["2"]?.stats?.fastest_time_s,
-                        f3: profile?.data?.dungeons?.catacombs?.floors["3"]?.stats?.fastest_time_s,
-                        f4: profile?.data?.dungeons?.catacombs?.floors["4"]?.stats?.fastest_time_s,
-                        f5: profile?.data?.dungeons?.catacombs?.floors["5"]?.stats?.fastest_time_s,
-                        f6: profile?.data?.dungeons?.catacombs?.floors["6"]?.stats?.fastest_time_s,
-                        f7: profile?.data?.dungeons?.catacombs?.floors["7"]?.stats?.fastest_time_s
+                        f1: profile?.data?.dungeons?.catacombs?.floors["1"]?.stats?.fastest_time_s_plus,
+                        f2: profile?.data?.dungeons?.catacombs?.floors["2"]?.stats?.fastest_time_s_plus,
+                        f3: profile?.data?.dungeons?.catacombs?.floors["3"]?.stats?.fastest_time_s_plus,
+                        f4: profile?.data?.dungeons?.catacombs?.floors["4"]?.stats?.fastest_time_s_plus,
+                        f5: profile?.data?.dungeons?.catacombs?.floors["5"]?.stats?.fastest_time_s_plus,
+                        f6: profile?.data?.dungeons?.catacombs?.floors["6"]?.stats?.fastest_time_s_plus,
+                        f7: profile?.data?.dungeons?.catacombs?.floors["7"]?.stats?.fastest_time_s_plus
                     },
                     master_catacombs: {
-                        m1: profile?.data?.dungeons?.master_catacombs?.floors["1"]?.stats?.fastest_time_s,
-                        m2: profile?.data?.dungeons?.master_catacombs?.floors["2"]?.stats?.fastest_time_s,
-                        m3: profile?.data?.dungeons?.master_catacombs?.floors["3"]?.stats?.fastest_time_s,
-                        m4: profile?.data?.dungeons?.master_catacombs?.floors["4"]?.stats?.fastest_time_s,
-                        m5: profile?.data?.dungeons?.master_catacombs?.floors["5"]?.stats?.fastest_time_s,
-                        m6: profile?.data?.dungeons?.master_catacombs?.floors["6"]?.stats?.fastest_time_s,
-                        m7: profile?.data?.dungeons?.master_catacombs?.floors["7"]?.stats?.fastest_time_s
+                        m1: profile?.data?.dungeons?.master_catacombs?.floors["1"]?.stats?.fastest_time_s_plus,
+                        m2: profile?.data?.dungeons?.master_catacombs?.floors["2"]?.stats?.fastest_time_s_plus,
+                        m3: profile?.data?.dungeons?.master_catacombs?.floors["3"]?.stats?.fastest_time_s_plus,
+                        m4: profile?.data?.dungeons?.master_catacombs?.floors["4"]?.stats?.fastest_time_s_plus,
+                        m5: profile?.data?.dungeons?.master_catacombs?.floors["5"]?.stats?.fastest_time_s_plus,
+                        m6: profile?.data?.dungeons?.master_catacombs?.floors["6"]?.stats?.fastest_time_s_plus,
+                        m7: profile?.data?.dungeons?.master_catacombs?.floors["7"]?.stats?.fastest_time_s_plus
                     },
                 },
                 experience: {
@@ -193,12 +192,16 @@ export default class playerData {
                         Healer: {
                             experience: profile?.data?.dungeons?.classes?.classes?.healer?.level?.xp, 
                             level: profile?.data?.dungeons?.classes?.classes?.healer?.level?.level
+                        },
+                        Average: {
+                            experience: profile?.data?.dungeons?.classes?.experience,
+                            level: parseFloat(profile?.data?.dungeons?.classes?.average_level_with_progress).toFixed(2)
                         }
                     }
                 },
                 selected_class: profile?.data?.dungeons?.classes?.selected_class,
                 secrets: profile?.data?.dungeons?.secrets_found
             };
-        })
+        }).catch(e => chat(`&cError at sky.shiiyu.moe&c: ${e}`))
     }
 }

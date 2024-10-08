@@ -278,12 +278,12 @@ defConfig
     subcategory: "Toggle",
     description: "",
 })
-// .addSwitch({
-//     category: "Terminals",
-//     configName: "termToggle",
-//     title: "&cToggle Terminals",
-//     description: "Decides wether all features in Terminals are &aenabled&7/&cdisabled&7.",
-// })
+.addSwitch({
+    category: "Party Finder",
+    configName: "partyFinderToggle",
+    title: "&cToggle Party Finder",
+    description: "Decides wether all features in Party Finder are &aenabled&7/&cdisabled&7.",
+})
 // .addSwitch({
 //     category: "Terminals",
 //     configName: "autoMelody",

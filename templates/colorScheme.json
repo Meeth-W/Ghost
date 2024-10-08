@@ -3,9 +3,9 @@
     "Button": {
         "background": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineColor": [
@@ -74,9 +74,9 @@
             "format": "§l",
             "centered": true,
             "selectedColor": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 255
             ]
         },
@@ -114,9 +114,9 @@
     "TextInput": {
         "background": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineColor": [
@@ -212,9 +212,9 @@
     "Switch": {
         "background": {
             "enabledColor": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "disabledColor": [
@@ -240,9 +240,9 @@
                 255
             ],
             "disabledColor": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 255
             ],
             "outlineColor": [
@@ -294,9 +294,9 @@
         },
         "completionbar": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineColor": [
@@ -316,9 +316,9 @@
                 80
             ],
             "outlineColor": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineSize": 1,
@@ -508,9 +508,9 @@
         "TextInput": {
             "background": {
                 "color": [
-                    242,
-                    63,
-                    66,
+                    50,
+                    90,
+                    168,
                     200
                 ],
                 "outlineColor": [
@@ -606,9 +606,9 @@
             },
             "completionbar": {
                 "color": [
-                    242,
-                    63,
-                    66,
+                    50,
+                    90,
+                    168,
                     200
                 ],
                 "outlineColor": [
@@ -628,9 +628,9 @@
                     80
                 ],
                 "outlineColor": [
-                    242,
-                    63,
-                    66,
+                    50,
+                    90,
+                    168,
                     200
                 ],
                 "outlineSize": 1,
@@ -740,9 +740,9 @@
         },
         "selectionbackground": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineColor": [
@@ -776,9 +776,9 @@
         },
         "dropdownbackground": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineColor": [
@@ -871,9 +871,9 @@
         },
         "dropdownbackground": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 200
             ],
             "outlineColor": [
@@ -912,9 +912,9 @@
         },
         "placeholderbackground": {
             "color": [
-                242,
-                63,
-                66,
+                50,
+                90,
+                168,
                 255
             ],
             "outlineColor": [
@@ -938,9 +938,9 @@
         "Checkbox": {
             "background": {
                 "enabledColor": [
-                    242,
-                    63,
-                    66,
+                    50,
+                    90,
+                    168,
                     255
                 ],
                 "disabledColor": [

@@ -10,7 +10,7 @@ defConfig
 .addSwitch({
     category: "General",
     configName: "toggle",
-    title: "&4&lToggle Ghost Client",
+    title: "&9&lToggle Ghost Client",
     description: "Decides whether all features of this mod are &aenabled&7/&cdisabled&7.",
     registerListener(previousvalue, newvalue) {
         ChatLib.chat(`§8[&6Ghost&8]§7 Ghost Client ${newvalue ? "&aEnabled" : "&cDisabled"}`)
@@ -19,7 +19,7 @@ defConfig
 .addSwitch({
     category: "Slot Binding",
     configName: "slotBindingToggle",
-    title: "&cToggle Slot Binding",
+    title: "&bToggle Slot Binding",
     description: "Decides wether all features in Slot Binding are &aenabled&7/&cdisabled&7."
 })
 .addDropDown({
@@ -64,7 +64,7 @@ defConfig
 .addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperToggle",
-    title: "&cToggle Blood Helper",
+    title: "&bToggle Blood Helper",
     description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.",
 })
 .addColorPicker({
@@ -116,7 +116,7 @@ defConfig
 .addSwitch({
     category: "Drag Prio",
     configName: "dragPrioToggle",
-    title: "&cToggle Drag Prio",
+    title: "&bToggle Drag Prio",
     description: "Decides wether all features in Drag Prio are &aenabled&7/&cdisabled&7.",
 })
 .addSlider({
@@ -183,7 +183,7 @@ defConfig
 .addSwitch({
     category: "Timers",
     configName: "timerToggle",
-    title: "&cToggle Timers",
+    title: "&bToggle Timers",
     description: "Decides wether all features in Timers are &aenabled&7/&cdisabled&7.",
 })
 .addSwitch({
@@ -210,7 +210,7 @@ defConfig
 .addSwitch({
     category: "Location Pings",
     configName: "locationMessagesToggle",
-    title: "&cToggle Location Pings",
+    title: "&bToggle Location Pings",
     description: "Decides wether all features in Location Pings are &aenabled&7/&cdisabled&7.",
 })
 .addSwitch({
@@ -281,7 +281,7 @@ defConfig
 .addSwitch({
     category: "Party Finder",
     configName: "partyFinderToggle",
-    title: "&cToggle Party Finder",
+    title: "&bToggle Party Finder",
     description: "Decides wether all features in Party Finder are &aenabled&7/&cdisabled&7.",
 })
 // .addSwitch({
@@ -306,7 +306,7 @@ defConfig
 //     subcategory: "Melody",
 // })
 
-const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§cGhost Client")
+const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§bGhost Client")
 .setPos(15, 15)
 .setSize(70, 70)
 .apply()

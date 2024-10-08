@@ -65,7 +65,7 @@ defConfig
     category: "Blood Helper",
     configName: "bloodHelperToggle",
     title: "&bToggle Blood Helper",
-    description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.",
+    description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.\n\n&bBlood Helper Credit: soshimee addons",
 })
 .addColorPicker({
     category: "Blood Helper",

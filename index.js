@@ -1,7 +1,5 @@
-import config from "./config";
 import { refresh_modules } from "./modules";
 import { data } from "./utils/data";
-import { chat } from "./utils/utils";
 
 register('step', () => {
     if (!data.recently_closed) return;

@@ -12,7 +12,7 @@ function setBlockAt(x, y, z, id) {
     world.func_175689_h(blockPos);
 }
 
-const coordinates = [
+const coreCoords = [
     { x: 58, y: 125, z: 121, id: 0 },
     { x: 58, y: 124, z: 121, id: 0 },
     { x: 58, y: 123, z: 121, id: 0 },
@@ -71,11 +71,15 @@ const coordinates = [
     { x: 57, y: 116, z: 51, id: 102 },
 ];
 
+ee2Coords = [
+
+]
+
 register('command', (args) => {
-    chat('&aPlacing Core Config')
-    coordinates.forEach(coord => {
+    coreCoords.forEach(coord => {
         setBlockAt(coord.x, coord.y, coord.z, coord.id);
     });
+    chat('&aCore Config Setup!')
 }).setName('placeConfig');
 
 export function toggle() {

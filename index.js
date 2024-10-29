@@ -47,6 +47,7 @@ gKey.registerKeyPress(() => {
     const block = Player.lookingAt();
     const blockID = block?.getType()?.getID();
     if (!blockID || blockID == 54 || blockID == 397 || blockID == 0) return;
+    if (!Player.getHeldItem().getName().removeFormatting().includes('Pickaxe')) return;
 
     setBlockAt(block.getX(), block.getY(), block.getZ(), 0);
     World.playSound('note.harp', 1, 2);

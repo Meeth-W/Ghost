@@ -19,6 +19,18 @@ register("command", (expression) => {
     }
 }).setName("calc").setAliases("eval", "math");
 
+// Anti lowballers !!!
+// const trigger = register('chat', (name, msg) => {
+//     if (msg.toLowerCase().includes('lowballing')) {
+//         ChatLib.command(`cr ${name}`)
+//         setTimeout(() => {
+//             setTimeout(() => {
+//                 Player.getContainer().click(11, false, 'RIGHT')
+//             }, 200);
+//         }, 250);
+//     }
+// }).setCriteria(/^\[.*?\] (\w+): .*(lowballing).*$/i)
+
 export function toggle() {
     if (config().configToggle && config().toggle) {
 

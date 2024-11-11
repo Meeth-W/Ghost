@@ -13,22 +13,9 @@ class StarMob {
         this.id = entity.getUUID();
         this.name = entity.getName();
         this.icon = null;
-        this.wither = false;
-        // this.updateHeight()
+
         this.update()
     }
-
-    // updateHeight() {
-    //     const [_, mobName, specialMob] = this.name.match(starMobRegex);
-
-    //     this.height = 1.9;
-
-    //     if (specialMob) return;
-    //     if (/^(?:\w+ )*Fels$/.test(mobName)) this.height = 2.8;
-    //     else if (/^(?:\w+ )*Withermancer$/.test(mobName)) this.height = 2.8;
-    //     else if (/Wither/.test(mobName)) this.height = 1;  // Matches any mob with "Wither" in its name
-    // }
-
     update() {
         this.name = this.entity.getName();
 
@@ -56,8 +43,9 @@ const scanMobs = register('tick', () => {
             if (/^(?:\w+ )*Fels$/.test(mobName)) height = 2.8;
             else if (/^(?:\w+ )*Withermancer$/.test(mobName)) height = 2.8;
         }
-        if (/Wither/.test(specialMob)) height = 3;  // Matches any mob with "Wither" in its name
+        if (/Wither/.test(specialMob)) height = 3;  
         mob.height = height;
+        
         star.push(mob);
     });
 

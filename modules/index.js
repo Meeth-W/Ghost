@@ -3,13 +3,14 @@ import bloodSplits from "./bloodSplits";
 import dragPrio from "./dragPrio";
 import ghostBlocks from "./ghostBlocks";
 import lowballing from "./lowballing";
+import mobESP from "./mobESP";
 import partyFinder from "./partyFinder";
 import positionalMessages from "./positionalMessages";
 import slotBinding from "./slotBinding";
 import timers from "./timers";
 
 export const modules = [
-    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing
+    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP
 ]
 
 export function refresh_modules() {

@@ -17,6 +17,20 @@ defConfig
     }
 })
 .addSwitch({
+    category: "Mob ESP",
+    configName: "mobESP",
+    title: "&bToggle Mob ESP",
+    description: "Decides wether all features in Mob ESP are &aenabled&7/&cdisabled&7.\n\n&9Mob ESP Credit: &7UnclaimedBloom6",
+})
+.addColorPicker({
+    category: "Mob ESP",
+    configName: "mobESPColor",
+    title: "ESP Color",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: ""
+})
+.addSwitch({
     category: "Slot Binding",
     configName: "slotBindingToggle",
     title: "&bToggle Slot Binding",

@@ -43,7 +43,8 @@ const scanMobs = register('tick', () => {
             if (/^(?:\w+ )*Fels$/.test(mobName)) height = 2.8;
             else if (/^(?:\w+ )*Withermancer$/.test(mobName)) height = 2.8;
         }
-        if (/Wither/.test(specialMob)) height = 3;  
+        if (/Wither/.test(specialMob)) height = 3;
+        if (/Shadow Assassin/.test(specialMob)) height = 1.8;
         mob.height = height;
         
         star.push(mob);
@@ -60,8 +61,8 @@ const renderESP = register('renderWorld', () => {
     const b = color[2] / 255;
 
     starMobs.forEach(mob => {
-        if (mob.height == 3) {
-            renderBoxOutline(mob.x, mob.y, mob.z, 1, mob.height, r, g, b, 1, 2, true); renderFilledBox(mob.x, mob.y, mob.z, 1, mob.height, r, g, b, 0.2, 2, true);
+        if (mob.height == 3 || mob.height == 1.8) {
+            renderBoxOutline(mob.x, mob.y, mob.z, 0.7, mob.height, r, g, b, 1, 2, true); renderFilledBox(mob.x, mob.y, mob.z, 0.7, mob.height, r, g, b, 0.2, 2, true);
         } else {
             renderBoxOutline(mob.x, mob.y - Math.ceil(mob.height), mob.z, 0.6, mob.height, r, g, b, 1, 2, true); renderFilledBox(mob.x, mob.y - Math.ceil(mob.height), mob.z, 0.6, mob.height, r, g, b, 0.2, 2, true);
         }

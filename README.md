@@ -3,13 +3,13 @@
 A Hypixel Skyblock QOL Mod
 
 ## TODO Features List
-- Mob ESP
+- Mob ESP ✅
 - Auto Melody
-- Blood Helper  ✅
+- Blood Helper ✅
 - Blood Splits ✅
 - Drag Priority ✅
 - Invincibility Timers ✅
-- Party Finder
+- Party Finder ✅
 - Positional Messages ✅
 - Relic / Crystal  Timers ✅
 - Slot Binding ✅

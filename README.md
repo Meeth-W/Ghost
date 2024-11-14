@@ -4,7 +4,6 @@ A Hypixel Skyblock QOL Mod
 
 ## TODO Features List
 - Mob ESP ✅
-- Auto Melody
 - Blood Helper ✅
 - Blood Splits ✅
 - Drag Priority ✅
@@ -13,3 +12,5 @@ A Hypixel Skyblock QOL Mod
 - Positional Messages ✅
 - Relic / Crystal  Timers ✅
 - Slot Binding ✅
+- Relic Timers
+- Rotation Triggers

@@ -3,8 +3,8 @@ import config from "../../config";
 import { chat } from "../../utils/utils";
 
 const emBlocks = [
-    { x: 68, y: 130, z: 50 }, { x: 66, y: 130, z: 50 }, { x: 64, y: 130, z: 50 }, // Top row (g, h, i)
-    { x: 68, y: 128, z: 50 }, { x: 66, y: 128, z: 50 }, { x: 64, y: 128, z: 50 }, // Middle row (d, e, f)
+    { x: 68, y: 130, z: 50 }, { x: 66, y: 130, z: 50 }, { x: 64, y: 130, z: 50 },
+    { x: 68, y: 128, z: 50 }, { x: 66, y: 128, z: 50 }, { x: 64, y: 128, z: 50 },
     { x: 68, y: 126, z: 50 }, { x: 66, y: 126, z: 50 }, { x: 64, y: 126, z: 50 }
 ]
 
@@ -16,18 +16,18 @@ const angles = [
 
 export const setYaw = (yaw) => Player.getPlayer().field_70177_z = yaw
 export const setPitch = (pitch) => Player.getPlayer().field_70125_A = pitch
+const isNearPlate = () => Player.getY() === 127 && Player.getX() >= 62 && Player.getX() <= 65 && Player.getZ() >= 34 && Player.getZ() <= 37;
 export function snapTo(yaw, pitch) {
     const player = Player.getPlayer();
     player.field_70177_z = yaw
     player.field_70125_A = pitch;
 }
+
 export function rightClick() {
     const rightClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147121_ag", null)
     rightClickMethod.setAccessible(true);
     rightClickMethod.invoke(Client.getMinecraft(), null);
 }
-
-
 function getNextAngle(current, key_pressed) {
     const [row, col] = current;
     switch (key_pressed) {
@@ -40,16 +40,12 @@ function getNextAngle(current, key_pressed) {
 }
 function getAdjacentBlocks(current) {
     const [row, col] = current;
-    const rowLength = 3;  // Grid has 3 columns
-
-    // Define adjacent blocks based on the current position
+    const rowLength = 3;
     if (col < rowLength - 1) {
-        // If not in the last column, return the current and next block horizontally
         const index1 = row * rowLength + col;
         const index2 = row * rowLength + col + 1;
         return [emBlocks[index1], emBlocks[index2]];
     } else {
-        // If in the last column, return the current block twice (no adjacent block on the right)
         const index = row * rowLength + col;
         return [emBlocks[index], emBlocks[index]];
     }
@@ -63,27 +59,32 @@ const rightKey = new KeyBind("Traverse Right", Keyboard.KEY_RIGHT, "Ghost");
 let current = [0, 0]
 
 upKey.registerKeyPress(() => {
+    if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'up');
     const { y, p } = angles[current[0]][current[1]];
     snapTo(y, p);
 });
 downKey.registerKeyPress(() => {
+    if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'down');
     const { y, p } = angles[current[0]][current[1]];
     snapTo(y, p);
 });
 leftKey.registerKeyPress(() => {
+    if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'left');
     const { y, p } = angles[current[0]][current[1]];
     snapTo(y, p);
 });
 rightKey.registerKeyPress(() => {
+    if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'right');
     const { y, p } = angles[current[0]][current[1]];
     snapTo(y, p);
 });
 
 const renderTargets = register('renderWorld', () => {
+    if (!config().keyFour || !isNearPlate()) return;
     const color = config().keyFourColor;
     const r = color[0] / 255;
     const g = color[1] / 255;
@@ -95,11 +96,11 @@ const renderTargets = register('renderWorld', () => {
 })
 
 export function toggle() {
-    if (config() && config().toggle) {
-
+    if (config().keyFour && config().toggle) {
+        renderTargets.register();
         return
     }
-
+    renderTargets.unregister();
     return
 }
 export default { toggle };

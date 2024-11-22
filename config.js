@@ -76,6 +76,27 @@ defConfig
     value: [255, 255, 255, 255],
 })
 .addSwitch({
+    category: "Key Four",
+    configName: "keyFour",
+    title: "&bToggle Key Four",
+    description: "Decides wether all features in Key Four are &aenabled&7/&cdisabled&7.",
+})
+.addColorPicker({
+    category: "Key Four",
+    configName: "keyFourColor",
+    title: "Target Color",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: ""
+})
+.addSwitch({
+    category: "Key Four",
+    configName: "keyFourViewMode",
+    title: "Toggle Smooth Look",
+    description: "Smoothly Rotates Between Targets.",
+    subcategory: "Movement",
+})
+.addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperToggle",
     title: "&bToggle Blood Helper",

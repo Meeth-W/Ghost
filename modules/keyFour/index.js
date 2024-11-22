@@ -103,10 +103,10 @@ upKey.registerKeyPress(() => {
     const { y, p } = angles[current[0]][current[1]];
     World.playSound('note.pling', 1, 1);
     if (config().keyFourViewMode) {
-        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }})
     } else {
         snapTo(y, p);
-        if (config().keyFourClickAfter) { rightClick(); }
+        if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }
     }
 });
 downKey.registerKeyPress(() => {
@@ -115,10 +115,10 @@ downKey.registerKeyPress(() => {
     const { y, p } = angles[current[0]][current[1]];
     World.playSound('note.pling', 1, 1);
     if (config().keyFourViewMode) {
-        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }})
     } else {
         snapTo(y, p);
-        if (config().keyFourClickAfter) { rightClick(); }
+        if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }
     }
 });
 leftKey.registerKeyPress(() => {
@@ -127,10 +127,10 @@ leftKey.registerKeyPress(() => {
     const { y, p } = angles[current[0]][current[1]];
     World.playSound('note.pling', 1, 1);
     if (config().keyFourViewMode) {
-        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }})
     } else {
         snapTo(y, p);
-        if (config().keyFourClickAfter) { rightClick(); }
+        if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }
     }
 });
 rightKey.registerKeyPress(() => {
@@ -139,10 +139,10 @@ rightKey.registerKeyPress(() => {
     const { y, p } = angles[current[0]][current[1]];
     World.playSound('note.pling', 1, 1);
     if (config().keyFourViewMode) {
-        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }})
     } else {
         snapTo(y, p);
-        if (config().keyFourClickAfter) { rightClick(); }
+        if (config().keyFourClickAfter) { setTimeout(() => { rightClick(); }, 100); }
     }
 });
 

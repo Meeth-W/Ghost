@@ -97,6 +97,13 @@ defConfig
     subcategory: "Movement",
 })
 .addSwitch({
+    category: "Key Four",
+    configName: "keyFourClickAfter",
+    title: "Shoot After",
+    description: "Right-clicks terminator if held after movement.",
+    subcategory: "Settings",
+})
+.addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperToggle",
     title: "&bToggle Blood Helper",

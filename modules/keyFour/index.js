@@ -22,7 +22,46 @@ export function snapTo(yaw, pitch) {
     player.field_70177_z = yaw
     player.field_70125_A = pitch;
 }
+function normalizeYaw(yaw) {
+    yaw = yaw % 360;
+    if (yaw > 180) {
+        yaw -= 360;
+    } else if (yaw < -180) {
+        yaw += 360;
+    }
+    return yaw;
+}
+export const smoothLook = (targetYaw, targetPitch, bonusSteps, done) => {
+    const totalSteps = 0 + bonusSteps;
+    let currentStep = 0;
 
+    if (targetPitch > 90) {
+        targetPitch = 90;
+    }
+    if (targetPitch < -90) {
+        targetPitch = -90;
+    }
+
+    const smoothLook_ = register('step', () => {
+        const curYaw = normalizeYaw(Player.getYaw());
+        const curPitch = Player.getPitch();
+
+        const yawDifference = normalizeYaw(targetYaw - curYaw);
+        const pitchDifference = targetPitch - curPitch;
+
+        const yawStep = yawDifference / totalSteps;
+        const pitchStep = pitchDifference / totalSteps;
+
+        if (currentStep < totalSteps) {
+            snapTo(normalizeYaw(curYaw + yawStep), curPitch + pitchStep)
+            currentStep++;
+        } else {
+            snapTo(targetYaw, targetPitch)
+            if (done) done()
+            smoothLook_.unregister();
+        }
+    });
+};
 export function rightClick() {
     const rightClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147121_ag", null)
     rightClickMethod.setAccessible(true);
@@ -62,37 +101,60 @@ upKey.registerKeyPress(() => {
     if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'up');
     const { y, p } = angles[current[0]][current[1]];
-    snapTo(y, p);
+    World.playSound('note.pling', 1, 1);
+    if (config().keyFourViewMode) {
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+    } else {
+        snapTo(y, p);
+        if (config().keyFourClickAfter) { rightClick(); }
+    }
 });
 downKey.registerKeyPress(() => {
     if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'down');
     const { y, p } = angles[current[0]][current[1]];
-    snapTo(y, p);
+    World.playSound('note.pling', 1, 1);
+    if (config().keyFourViewMode) {
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+    } else {
+        snapTo(y, p);
+        if (config().keyFourClickAfter) { rightClick(); }
+    }
 });
 leftKey.registerKeyPress(() => {
     if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'left');
     const { y, p } = angles[current[0]][current[1]];
-    snapTo(y, p);
+    World.playSound('note.pling', 1, 1);
+    if (config().keyFourViewMode) {
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+    } else {
+        snapTo(y, p);
+        if (config().keyFourClickAfter) { rightClick(); }
+    }
 });
 rightKey.registerKeyPress(() => {
     if (!config().keyFour || !isNearPlate()) return;
     current = getNextAngle(current, 'right');
     const { y, p } = angles[current[0]][current[1]];
-    snapTo(y, p);
+    World.playSound('note.pling', 1, 1);
+    if (config().keyFourViewMode) {
+        smoothLook(y, p, 4, () => { if (config().keyFourClickAfter) { rightClick(); }})
+    } else {
+        snapTo(y, p);
+        if (config().keyFourClickAfter) { rightClick(); }
+    }
 });
 
 const renderTargets = register('renderWorld', () => {
     if (!config().keyFour || !isNearPlate()) return;
-    const color = config().keyFourColor;
-    const r = color[0] / 255;
-    const g = color[1] / 255;
-    const b = color[2] / 255;
 
+    const color = config().keyFourColor;
+    const r = color[0] / 255; const g = color[1] / 255; const b = color[2] / 255;
     const [blockA, blockB] = getAdjacentBlocks(current);
-    renderBoxOutline(blockA.x, blockA.y, blockA.z, 1, 1, r, g, b, 1, 1, true)
-    renderBoxOutline(blockB.x, blockB.y, blockB.z, 1, 1, r, g, b, 1, 1, true)
+
+    renderBoxOutline(blockA.x+0.5, blockA.y, blockA.z+0.5, 1, 1, r, g, b, 1, 1, true)
+    renderBoxOutline(blockB.x+0.5, blockB.y, blockB.z+0.5, 1, 1, r, g, b, 1, 1, true)
 })
 
 export function toggle() {

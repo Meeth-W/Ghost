@@ -1,6 +1,5 @@
 import { renderBoxOutline } from "../../../BloomCore/RenderUtils";
 import config from "../../config";
-import { chat } from "../../utils/utils";
 
 const emBlocks = [
     { x: 68, y: 130, z: 50 }, { x: 66, y: 130, z: 50 }, { x: 64, y: 130, z: 50 },

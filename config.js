@@ -156,6 +156,22 @@ defConfig
     subcategory: "Display",
 })
 .addSwitch({
+    category: "Blood Helper",
+    configName: "bloodHelperAuto",
+    title: "Auto Blood Camp",
+    description: "Automatically snaps to and lcm's blood mobs.",
+    subcategory: "Auto",
+})
+.addTextInput({
+    category: "Blood Helper",
+    configName: "bloodHelperClickTime",
+    title: "Click Delay",
+    description: "Time at which the mod attempts to left click.",
+    value: "2",
+    placeHolder: "2",
+    subcategory: "Auto",
+})
+.addSwitch({
     category: "Drag Prio",
     configName: "dragPrioToggle",
     title: "&bToggle Drag Prio",

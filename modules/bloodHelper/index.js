@@ -5,6 +5,59 @@ import Vector3 from "../../../BloomCore/utils/Vector3";
 import config from "../../config";
 import { chat, getColor } from "../../utils/utils";
 
+// Auto Stuff
+export function getEyePos() {
+    return {
+        x: Player.getX(),
+        y: Player.getY() + Player.getPlayer().func_70047_e(),
+        z: Player.getZ()
+    };
+}
+export function snapTo(yaw, pitch) {
+    const player = Player.getPlayer();
+
+    player.field_70177_z = yaw
+    player.field_70125_A = pitch;
+}
+export function calcYawPitch(blcPos, plrPos) {
+    if (!plrPos) plrPos = getEyePos();
+    let d = {
+        x: blcPos.x - plrPos.x,
+        y: blcPos.y - plrPos.y,
+        z: blcPos.z - plrPos.z
+    };
+    let yaw = 0;
+    let pitch = 0;
+    if (d.x != 0) {
+        if (d.x < 0) { yaw = 1.5 * Math.PI; } else { yaw = 0.5 * Math.PI; }
+        yaw = yaw - Math.atan(d.z / d.x);
+    } else if (d.z < 0) { yaw = Math.PI; }
+    d.xz = Math.sqrt(Math.pow(d.x, 2) + Math.pow(d.z, 2));
+    pitch = -Math.atan(d.y / d.xz);
+    yaw = -yaw * 180 / Math.PI;
+    pitch = pitch * 180 / Math.PI;
+    if (pitch < -90 || pitch > 90 || isNaN(yaw) || isNaN(pitch) || yaw == null || pitch == null || yaw == undefined || pitch == null) return;
+
+    return [yaw, pitch]
+}
+function leftClick() {
+    const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null)
+    leftClickMethod.setAccessible(true);
+    leftClickMethod.invoke(Client.getMinecraft(), null)
+}
+
+let lastclicked;
+function doCamp(blcPos) {
+	if (!config().bloodHelperAuto || watcherPhase == 0) return;
+	if ( Date.now() - lastclicked < 150 ) return;
+	
+	chat('Mob Detected: Attempting to kill.')
+	const [yaw, pitch] = calcYawPitch(blcPos);
+	snapTo(yaw, pitch);
+	setTimeout(() => { leftClick(); }, 50);
+	lastclicked = Date.now();
+}
+
 const EntityArmorStand = Java.type("net.minecraft.entity.item.EntityArmorStand");
 const S17PacketEntityLookMove = Java.type("net.minecraft.network.play.server.S14PacketEntity$S17PacketEntityLookMove");
 // Thank u soshimee
@@ -13,51 +66,6 @@ const skins = ["eyJ0aW1lc3RhbXAiOjE1ODYwNDEwNjQwNTAsInByb2ZpbGVJZCI6ImRhNDk4YWM0
 let inDungeon = false;
 let watcherPhase = 0;
 const entities = {};
-
-let pinging = false
-
-export const smoothLook = (targetYaw, targetPitch, bonusSteps, done) => {
-    const totalSteps = 0 + bonusSteps; // Reduced steps for faster head rotation
-    let currentStep = 0;
-
-    if (targetPitch > 90) {
-        targetPitch = 90;
-    }
-    if (targetPitch < -90) {
-        targetPitch = -90;
-    }
-
-    const smoothLook_ = register('step', () => {
-        const curYaw = normalizeYaw(Player.getYaw());
-        const curPitch = Player.getPitch();
-
-        const yawDifference = normalizeYaw(targetYaw - curYaw);
-        const pitchDifference = targetPitch - curPitch;
-
-        const yawStep = yawDifference / totalSteps;
-        const pitchStep = pitchDifference / totalSteps;
-
-        if (currentStep < totalSteps) {
-            snapTo(normalizeYaw(curYaw + yawStep), curPitch + pitchStep)
-            currentStep++;
-        } else {
-            snapTo(targetYaw, targetPitch)
-            if (done) done()
-            smoothLook_.unregister();
-        }
-    });
-};
-
-function normalizeYaw(yaw) {
-    yaw = yaw % 360;
-    if (yaw > 180) {
-        yaw -= 360;
-    } else if (yaw < -180) {
-        yaw += 360;
-    }
-    return yaw;
-}
-
 const renderTrigger = register("renderWorld", () => {
 	for (let o of Object.entries(entities)) {
 		let [k, v] = o;
@@ -65,6 +73,7 @@ const renderTrigger = register("renderWorld", () => {
 		const vec1 = new Vector3(v.final[0], v.final[1], v.final[2]).subtract(new Vector3(v.entity.getRenderX(), v.entity.getRenderY(), v.entity.getRenderZ()));
 		const vec2 = new Vector3(v.final[0], v.final[1], v.final[2]).subtract(new Vector3(v.initial[0], v.initial[1], v.initial[2]));
 		const progress = vec1.getLength() / vec2.getLength();
+		if (((progress * v.ticks / 20)*10).toFixed(1) <= parseFloat(config().bloodHelperClickTime) && ((progress * v.ticks / 20)*10).toFixed(1) >= parseFloat(config().bloodHelperClickTime) - 1) { doCamp({ x: v.final[0], y: v.final[1] + 1.5, z: v.final[2] })}
 		if(config().bloodHelperDynamicColor) {
 			if ((progress * v.ticks / 20) > 0.6) RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperInitialColor).getRed()/255, getColor(config().bloodHelperInitialColor).getGreen()/255, getColor(config().bloodHelperInitialColor).getBlue()/255, getColor(config().bloodHelperInitialColor)/255, true);
 			else if ((progress * v.ticks / 20) > 0.1) RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperSecondaryColor).getRed()/255, getColor(config().bloodHelperSecondaryColor).getGreen()/255, getColor(config().bloodHelperSecondaryColor).getBlue()/255, getColor(config().bloodHelperSecondaryColor)/255, true);

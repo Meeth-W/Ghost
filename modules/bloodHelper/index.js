@@ -51,7 +51,6 @@ function doCamp(blcPos) {
 	if (!config().bloodHelperAuto || watcherPhase == 0) return;
 	if ( Date.now() - lastclicked < 150 ) return;
 	
-	chat('Mob Detected: Attempting to kill.')
 	const [yaw, pitch] = calcYawPitch(blcPos);
 	snapTo(yaw, pitch);
 	setTimeout(() => { leftClick(); }, 50);

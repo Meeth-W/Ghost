@@ -1,5 +1,4 @@
 import config from "../config";
-import { data } from "./data";
 
 export const prefix = "§8[&6Ghost&8]§7"
 /**

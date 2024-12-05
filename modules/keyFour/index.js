@@ -1,5 +1,6 @@
 import { renderBoxOutline } from "../../../BloomCore/RenderUtils";
 import config from "../../config";
+import { rightClick, smoothLook, snapTo } from "../../utils/utils";
 
 const emBlocks = [
     { x: 68, y: 130, z: 50 }, { x: 66, y: 130, z: 50 }, { x: 64, y: 130, z: 50 },
@@ -13,59 +14,9 @@ const angles = [
     [{ y: -15.3, p: 4.9 }, { y: -7.5, p: 5.4 }]
 ]
 
-export const setYaw = (yaw) => Player.getPlayer().field_70177_z = yaw
-export const setPitch = (pitch) => Player.getPlayer().field_70125_A = pitch
+
 const isNearPlate = () => Player.getY() === 127 && Player.getX() >= 62 && Player.getX() <= 65 && Player.getZ() >= 34 && Player.getZ() <= 37;
-export function snapTo(yaw, pitch) {
-    const player = Player.getPlayer();
-    player.field_70177_z = yaw
-    player.field_70125_A = pitch;
-}
-function normalizeYaw(yaw) {
-    yaw = yaw % 360;
-    if (yaw > 180) {
-        yaw -= 360;
-    } else if (yaw < -180) {
-        yaw += 360;
-    }
-    return yaw;
-}
-export const smoothLook = (targetYaw, targetPitch, bonusSteps, done) => {
-    const totalSteps = 0 + bonusSteps;
-    let currentStep = 0;
 
-    if (targetPitch > 90) {
-        targetPitch = 90;
-    }
-    if (targetPitch < -90) {
-        targetPitch = -90;
-    }
-
-    const smoothLook_ = register('step', () => {
-        const curYaw = normalizeYaw(Player.getYaw());
-        const curPitch = Player.getPitch();
-
-        const yawDifference = normalizeYaw(targetYaw - curYaw);
-        const pitchDifference = targetPitch - curPitch;
-
-        const yawStep = yawDifference / totalSteps;
-        const pitchStep = pitchDifference / totalSteps;
-
-        if (currentStep < totalSteps) {
-            snapTo(normalizeYaw(curYaw + yawStep), curPitch + pitchStep)
-            currentStep++;
-        } else {
-            snapTo(targetYaw, targetPitch)
-            if (done) done()
-            smoothLook_.unregister();
-        }
-    });
-};
-export function rightClick() {
-    const rightClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147121_ag", null)
-    rightClickMethod.setAccessible(true);
-    rightClickMethod.invoke(Client.getMinecraft(), null);
-}
 function getNextAngle(current, key_pressed) {
     const [row, col] = current;
     switch (key_pressed) {

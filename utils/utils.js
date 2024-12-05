@@ -205,8 +205,8 @@ export function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export const isBetween = (number, [a, b]) => number >= a && number <= b
-export const sbLevelsPrefix = {
+const isBetween = (number, [a, b]) => number >= a && number <= b
+const sbLevelsPrefix = {
     "&7": [1, 39],
     "&f": [40, 79],
     "&e": [80, 119],
@@ -226,3 +226,144 @@ export const sbLevelsPrefix = {
  * @returns String
  */
 export const getSbLevelPrefix = (number) => Object.keys(sbLevelsPrefix).filter(pref => isBetween(number, sbLevelsPrefix[pref]))
+
+export function getBlockPosFloor(x, y, z) {
+    return new BlockPos(Math.floor(x), Math.floor(y), Math.floor(z));
+}
+const MCBlock = Java.type("net.minecraft.block.Block");
+/**
+ * Places a ghost block in the world.
+ * @param {*} x X Coords
+ * @param {*} y Y Coords
+ * @param {*} z Z Coords
+ * @param {*} id Minecraft Block ID
+ */
+export function setBlockAt(x, y, z, id) {
+    const world = World.getWorld();
+    const blockPos = getBlockPosFloor(x, y, z).toMCBlock();
+    world.func_175656_a(blockPos, MCBlock.func_176220_d(id));
+    world.func_175689_h(blockPos);
+}
+
+/**
+ * Returns eye position of the player
+ * @returns {x, y, z}
+ */
+export function getEyePos() {
+    return {
+        x: Player.getX(),
+        y: Player.getY() + Player.getPlayer().func_70047_e(),
+        z: Player.getZ()
+    };
+}
+
+/**
+ * Sets players yaw and pitch
+ * @param {float} yaw 
+ * @param {float} pitch 
+ */
+export function snapTo(yaw, pitch) {
+    const player = Player.getPlayer();
+
+    player.field_70177_z = yaw
+    player.field_70125_A = pitch;
+}
+
+/**
+ * Calculates yaw and pitch to a certain block.
+ * @param {*} blcPos 
+ * @param {*} plrPos 
+ * @returns [yaw, pitch]
+ */
+export function calcYawPitch(blcPos, plrPos) {
+    if (!plrPos) plrPos = getEyePos();
+    let d = {
+        x: blcPos.x - plrPos.x,
+        y: blcPos.y - plrPos.y,
+        z: blcPos.z - plrPos.z
+    };
+    let yaw = 0;
+    let pitch = 0;
+    if (d.x != 0) {
+        if (d.x < 0) { yaw = 1.5 * Math.PI; } else { yaw = 0.5 * Math.PI; }
+        yaw = yaw - Math.atan(d.z / d.x);
+    } else if (d.z < 0) { yaw = Math.PI; }
+    d.xz = Math.sqrt(Math.pow(d.x, 2) + Math.pow(d.z, 2));
+    pitch = -Math.atan(d.y / d.xz);
+    yaw = -yaw * 180 / Math.PI;
+    pitch = pitch * 180 / Math.PI;
+    if (pitch < -90 || pitch > 90 || isNaN(yaw) || isNaN(pitch) || yaw == null || pitch == null || yaw == undefined || pitch == null) return;
+
+    return [yaw, pitch]
+}
+
+/**
+ * Triggers Left Click!
+ */
+export function leftClick() {
+    const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null)
+    leftClickMethod.setAccessible(true);
+    leftClickMethod.invoke(Client.getMinecraft(), null)
+}
+
+/**
+ * Triggers Right Click!
+ */
+export function rightClick() {
+    const rightClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147121_ag", null)
+    rightClickMethod.setAccessible(true);
+    rightClickMethod.invoke(Client.getMinecraft(), null);
+}
+
+
+function normalizeYaw(yaw) {
+    yaw = yaw % 360;
+    if (yaw > 180) {
+        yaw -= 360;
+    } else if (yaw < -180) {
+        yaw += 360;
+    }
+    return yaw;
+}
+/**
+ * Smoothly rotates to a certain angle.
+ * @param {*} targetYaw 
+ * @param {*} targetPitch 
+ * @param {*} bonusSteps 
+ * @param {*} done 
+ */
+export const smoothLook = (targetYaw, targetPitch, bonusSteps, done) => {
+    const totalSteps = 0 + bonusSteps;
+    let currentStep = 0;
+
+    if (targetPitch > 90) {
+        targetPitch = 90;
+    }
+    if (targetPitch < -90) {
+        targetPitch = -90;
+    }
+
+    const smoothLook_ = register('step', () => {
+        const curYaw = normalizeYaw(Player.getYaw());
+        const curPitch = Player.getPitch();
+
+        const yawDifference = normalizeYaw(targetYaw - curYaw);
+        const pitchDifference = targetPitch - curPitch;
+
+        const yawStep = yawDifference / totalSteps;
+        const pitchStep = pitchDifference / totalSteps;
+
+        if (currentStep < totalSteps) {
+            snapTo(normalizeYaw(curYaw + yawStep), curPitch + pitchStep)
+            currentStep++;
+        } else {
+            snapTo(targetYaw, targetPitch)
+            if (done) done()
+            smoothLook_.unregister();
+        }
+    });
+};
+
+
+export const setYaw = (yaw) => Player.getPlayer().field_70177_z = yaw
+export const setPitch = (pitch) => Player.getPlayer().field_70125_A = pitch

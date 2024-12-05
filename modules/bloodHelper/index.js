@@ -3,48 +3,10 @@ import dungeonRoom from "../../events/dungeonRoom";
 import Dungeon from "../../../BloomCore/dungeons/Dungeon";
 import Vector3 from "../../../BloomCore/utils/Vector3";
 import config from "../../config";
-import { chat, getColor } from "../../utils/utils";
+import { calcYawPitch, chat, getColor, leftClick, snapTo } from "../../utils/utils";
 
 // Auto Stuff
-export function getEyePos() {
-    return {
-        x: Player.getX(),
-        y: Player.getY() + Player.getPlayer().func_70047_e(),
-        z: Player.getZ()
-    };
-}
-export function snapTo(yaw, pitch) {
-    const player = Player.getPlayer();
 
-    player.field_70177_z = yaw
-    player.field_70125_A = pitch;
-}
-export function calcYawPitch(blcPos, plrPos) {
-    if (!plrPos) plrPos = getEyePos();
-    let d = {
-        x: blcPos.x - plrPos.x,
-        y: blcPos.y - plrPos.y,
-        z: blcPos.z - plrPos.z
-    };
-    let yaw = 0;
-    let pitch = 0;
-    if (d.x != 0) {
-        if (d.x < 0) { yaw = 1.5 * Math.PI; } else { yaw = 0.5 * Math.PI; }
-        yaw = yaw - Math.atan(d.z / d.x);
-    } else if (d.z < 0) { yaw = Math.PI; }
-    d.xz = Math.sqrt(Math.pow(d.x, 2) + Math.pow(d.z, 2));
-    pitch = -Math.atan(d.y / d.xz);
-    yaw = -yaw * 180 / Math.PI;
-    pitch = pitch * 180 / Math.PI;
-    if (pitch < -90 || pitch > 90 || isNaN(yaw) || isNaN(pitch) || yaw == null || pitch == null || yaw == undefined || pitch == null) return;
-
-    return [yaw, pitch]
-}
-function leftClick() {
-    const leftClickMethod = Client.getMinecraft().getClass().getDeclaredMethod("func_147116_af", null)
-    leftClickMethod.setAccessible(true);
-    leftClickMethod.invoke(Client.getMinecraft(), null)
-}
 
 let lastclicked;
 function doCamp(blcPos) {

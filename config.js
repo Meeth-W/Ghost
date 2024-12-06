@@ -165,8 +165,8 @@ defConfig
 .addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperAuto",
-    title: "Auto Blood Camp",
-    description: "Automatically snaps to and lcm's blood mobs.",
+    title: "Triggerbot",
+    description: "Left clicks wow!",
     subcategory: "Auto",
 })
 .addTextInput({

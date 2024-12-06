@@ -36,16 +36,17 @@ const mainTrigger = register("chat", () => {
     let bloodMovePrediction
     let bloodMovePredictionTicks
 
+    let bloodLag = (bloodMove - bloodMoveTicks)
     chat(`&cTime&b: &6${bloodMove} Seconds`)
     chat(`&cTicks&b: &6${bloodMoveTicks} &8(&7${((bloodMoveTicks) / 0.05).toFixed(0)} Ticks&8)`)
 
-    if (bloodMoveTicks >= 31 && bloodMoveTicks <= 33.99) bloodMovePredictionTicks = 36
+    if (bloodMoveTicks >= 31 && bloodMoveTicks <= 33.99) bloodMovePredictionTicks = (36 + bloodLag).toFixed(2)
     if (bloodMove >= 31 && bloodMove <= 33.99) bloodMovePrediction = 36
-    if (bloodMoveTicks >= 28 && bloodMoveTicks <= 30.99) bloodMovePredictionTicks = 33
+    if (bloodMoveTicks >= 28 && bloodMoveTicks <= 30.99) bloodMovePredictionTicks = (33 + bloodLag).toFixed(2)
     if (bloodMove >= 28 && bloodMove <= 30.99) bloodMovePrediction = 33
-    if (bloodMoveTicks >= 25 && bloodMoveTicks <= 27.99) bloodMovePredictionTicks = 30
+    if (bloodMoveTicks >= 25 && bloodMoveTicks <= 27.99) bloodMovePredictionTicks = (30 + bloodLag).toFixed(2)
     if (bloodMove >= 25 && bloodMove <= 27.99) bloodMovePrediction = 30
-    if (bloodMoveTicks >= 22 && bloodMoveTicks <= 24.99) bloodMovePredictionTicks = 27
+    if (bloodMoveTicks >= 22 && bloodMoveTicks <= 24.99) bloodMovePredictionTicks = (27 + bloodLag).toFixed(2)
     if (bloodMove >= 22 && bloodMove <= 24.99) bloodMovePrediction = 27
     if (bloodMoveTicks >= 1 && bloodMoveTicks <= 21.99) bloodMovePredictionTicks = 24
     if (bloodMove >= 1 && bloodMove <= 21.99) bloodMovePrediction = 24

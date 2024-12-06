@@ -33,13 +33,18 @@ const entities = {};
 const renderTrigger = register("renderWorld", () => {
 	for (let o of Object.entries(entities)) {
 		let [k, v] = o;
-		if (!config().bloodHelperDynamicColor) RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperColor).getRed()/255, getColor(config().bloodHelperColor).getGreen()/255, getColor(config().bloodHelperColor).getBlue()/255, config().bloodHelper0/255, true);
 		const vec1 = new Vector3(v.final[0], v.final[1], v.final[2]).subtract(new Vector3(v.entity.getRenderX(), v.entity.getRenderY(), v.entity.getRenderZ()));
 		const vec2 = new Vector3(v.final[0], v.final[1], v.final[2]).subtract(new Vector3(v.initial[0], v.initial[1], v.initial[2]));
 		const progress = vec1.getLength() / vec2.getLength();
+		// Auto Blood Camp
 		if (((progress * v.ticks / 20)*10).toFixed(1) <= parseFloat(config().bloodHelperClickTime) && ((progress * v.ticks / 20)*10).toFixed(1) >= parseFloat(config().bloodHelperClickTime) - 1) { doCamp({ x: v.final[0], y: v.final[1] + 1, z: v.final[2] })}
-		if(config().bloodHelperDynamicColor) {
-			if ((progress * v.ticks / 20) > 0.6) RenderLib.drawEspBox(v.final[0], v.final[1], v.final[2], 0.75, 0.75, getColor(config().bloodHelperInitialColor).getRed()/255, getColor(config().bloodHelperInitialColor).getGreen()/255, getColor(config().bloodHelperInitialColor).getBlue()/255, getColor(config().bloodHelperInitialColor)/255, true);
+		
+		// Rendering Stuff
+		if (!config().bloodHelperDynamicColor && config().bloodRenderToggle) {
+			RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperColor).getRed()/255, getColor(config().bloodHelperColor).getGreen()/255, getColor(config().bloodHelperColor).getBlue()/255, config().bloodHelper0/255, true); 
+		}
+		if (config().bloodHelperDynamicColor && config().bloodRenderToggle) {
+			if ((progress * v.ticks / 20) > 0.6) RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperInitialColor).getRed()/255, getColor(config().bloodHelperInitialColor).getGreen()/255, getColor(config().bloodHelperInitialColor).getBlue()/255, getColor(config().bloodHelperInitialColor)/255, true);
 			else if ((progress * v.ticks / 20) > 0.1) RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperSecondaryColor).getRed()/255, getColor(config().bloodHelperSecondaryColor).getGreen()/255, getColor(config().bloodHelperSecondaryColor).getBlue()/255, getColor(config().bloodHelperSecondaryColor)/255, true);
 			else RenderLib.drawEspBox(v.final[0], v.final[1] + 1, v.final[2], 0.75, 0.75, getColor(config().bloodHelperFinalColor).getRed()/255, getColor(config().bloodHelperFinalColor).getGreen()/255, getColor(config().bloodHelperFinalColor).getBlue()/255, getColor(config().bloodHelperFinalColor)/255, true);
 		}

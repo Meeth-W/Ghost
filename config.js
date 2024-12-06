@@ -152,7 +152,14 @@ defConfig
     category: "Blood Helper",
     configName: "watcherMoveDisplay",
     title: "Watcher Move Display",
-    description: "Shows when watcher is about to move.",
+    description: "Shows when watcher is going to move.",
+    subcategory: "Display",
+})
+.addSwitch({
+    category: "Blood Helper",
+    configName: "bloodRenderToggle",
+    title: "Blood Camp Assist",
+    description: "Renders boxes where blood mobs are going to spawn.",
     subcategory: "Display",
 })
 .addSwitch({

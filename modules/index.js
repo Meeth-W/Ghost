@@ -1,6 +1,7 @@
 import bloodHelper from "./bloodHelper";
 import bloodSplits from "./bloodSplits";
 import dragPrio from "./dragPrio";
+import fastLeap from "./fastLeap";
 import ghostBlocks from "./ghostBlocks";
 import keyFour from "./keyFour";
 import lowballing from "./lowballing";
@@ -11,7 +12,7 @@ import slotBinding from "./slotBinding";
 import timers from "./timers";
 
 export const modules = [
-    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP, keyFour
+    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP, keyFour, fastLeap
 ]
 
 export function refresh_modules() {

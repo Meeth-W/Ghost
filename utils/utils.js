@@ -1,3 +1,4 @@
+import Dungeon from "../../BloomCore/dungeons/Dungeon";
 import config from "../config";
 
 export const prefix = "§8[&6Ghost&8]§7"
@@ -366,3 +367,66 @@ export const smoothLook = (targetYaw, targetPitch, bonusSteps, done) => {
 
 export const setYaw = (yaw) => Player.getPlayer().field_70177_z = yaw
 export const setPitch = (pitch) => Player.getPlayer().field_70125_A = pitch
+
+/**
+ * Checks if player is in a 3d space
+ * @param {*} x1 
+ * @param {*} y1 
+ * @param {*} z1 
+ * @param {*} x2 
+ * @param {*} y2 
+ * @param {*} z2 
+ * @returns 
+ */
+export function isPlayerInBox(x1, y1, z1, x2, y2, z2) {
+    const x = Player.getX();
+    const y = Player.getY();
+    const z = Player.getZ();
+
+    return (x >= Math.min(x1, x2) && x <= Math.max(x1, x2) &&
+            y >= Math.min(y1, y2) && y <= Math.max(y1, y2) &&
+            z >= Math.min(z1, z2) && z <= Math.max(z1, z2));
+}
+
+
+/**
+ * Returns the current phase in the m7 boss fight!
+ * @returns {number} 
+ */
+export function getPhase() {
+    // if (!isInDungeon()) return null;
+    if (Player.getY() > 220) return 1
+    else if (Player.getY() > 162) return 2
+    else if (Player.getY() > 100) {
+        if (isPlayerInBox(113, 160, 48, 89, 100, 122)) return 3.1
+        else if (isPlayerInBox(91, 160, 145, 19, 100, 121)) return 3.2
+        else if (isPlayerInBox(-6, 160, 123, 19, 100, 50)) return 3.3
+        else if (isPlayerInBox(17, 160, 27, 90, 100, 50)) return 3.4
+        else return 3.5
+    } else if (Player.getY() > 55) return 4
+    else if (Player.getY() > 0) return 5
+}
+
+
+/**
+ * Returns the item id of the held item
+ * @returns {string}
+ */
+export function getHeldItemID() {
+    const item = Player.getHeldItem();
+    const itemId = item?.getNBT()?.get("tag")?.get("ExtraAttributes")?.getString("id");
+    return itemId;
+}
+
+
+/**
+ * Returns the ign's of all the classes!
+ * @returns {dict}
+ */
+export function getClasses() {
+    const party = Dungeon.playerClasses;
+
+    let classes = {"Mage": null, "Archer": null, "Tank": null, "Berserk": null, "Healer": null};
+    for (let ign in party) { classes[party[ign].class] = ign; }
+    return classes;
+}

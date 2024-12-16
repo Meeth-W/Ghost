@@ -76,6 +76,100 @@ defConfig
     value: [255, 255, 255, 255],
 })
 .addSwitch({
+    category: "Fast Leap",
+    configName: "fastLeapToggle",
+    title: "&6Toggle Fast Leap",
+    description: "Decides wether all features in Fast Leap are &aenabled&7/&cdisabled&7."
+})
+.addSwitch({
+    category: "Fast Leap",
+    configName: "fastLeapGUI",
+    title: "Overlay",
+    description: "GUI Overlay for Fast Leap\nOnly renders while holding leap!",
+    subcategory: "Settings"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP1",
+    title: "P1",
+    description: "\n&6Phase 1&7 -> &6Phase 2\n\n&7Usually &cBerserk",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 2,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP2",
+    title: "P2",
+    description: "\n&6Phase 2&7 -> &6Phase 3 &bSection 1\n\n&7Usually &dHealer&7/&cBerserk",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 2,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP3S1",
+    title: "P3 S1",
+    description: "\n&6Phase 3 &bSection 1&7 -> &6Phase 3 &bSection 2\n\n&7Usually &6Archer&7/&bMage",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 1,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP3S2",
+    title: "P3 S2",
+    description: "\n&6Phase 3 &bSection 2&7 -> &6Phase 3 &bSection 3\n\n&7Usually &dHealer",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 3,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP3S3",
+    title: "P3 S3",
+    description: "\n&6Phase 3 &bSection 3&7 -> &6Phase 3 &bSection 4\n\n&7Usually &bMage",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 0,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP3S4",
+    title: "P3 S4",
+    description: "\n&6Phase 3 &bSection 4&7 -> &6Phase 3 &bCore\n\n&7Usually &bMage",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 0,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP3Core",
+    title: "P3 Core",
+    description: "\n&6Phase 3 &bCore&7 -> &6Phase 4\n\n&7Usually &dHealer",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 3,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapP4",
+    title: "P4",
+    description: "\n&6Phase 4&7 -> &6Phase 5\n\n&7Usually &dHealer",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 3,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
+    configName: "fastLeapRelic",
+    title: "Relic",
+    description: "\n&6Phase 4&7 -> &6Phase 5\n\n&7Usually &6Archer&7/&cBerserk",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 1,
+    subcategory: "Players"
+})
+.addSwitch({
     category: "Key Four",
     configName: "keyFour",
     title: "&6Toggle Key Four",

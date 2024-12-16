@@ -15,7 +15,7 @@ function getLeap() {
     else if (phase == 3.2) { target = getClasses()[order[config().fastLeapP3S2]] } 
     else if (phase == 3.3) { target = getClasses()[order[config().fastLeapP3S3]] }
     else if (phase == 3.4) { target = getClasses()[order[config().fastLeapP3S4]] }
-    else if (phase == 3.5) { target = getClasses()[order[config().fastLeapP3SCore]] }
+    else if (phase == 3.5) { target = getClasses()[order[config().fastLeapP3Core]] }
     else if (phase == 4) { target = getClasses()[order[config().fastLeapP4]] }
     else if (phase == 5) { target = getClasses()[order[config().fastLeapRelic]]}
     

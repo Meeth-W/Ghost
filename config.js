@@ -112,42 +112,50 @@ defConfig
 .addColorPicker({
     category: "Blood Helper",
     configName: "bloodHelperColor",
-    title: "Helper Color",
+    title: "Prediction Color",
     value: [255, 255, 255, 255],
     subcategory: "Colors",
-    description: ""
-})
-.addSwitch({
-    category: "Blood Helper",
-    configName: "bloodHelperDynamicColor",
-    title: "Toggle Dynamic Color",
-    description: "Automatically decides the color of your blood helper.",
-    subcategory: "Colors",
+    description: "Final location of the armour stand entity!"
 })
 .addColorPicker({
     category: "Blood Helper",
-    configName: "bloodHelperInitialColor",
-    title: "Initial Color",
-    description: "",
-    value: [255, 255, 255, 255],
-    subcategory: "Colors"
-})
-.addColorPicker({
-    category: "Blood Helper",
-    configName: "bloodHelperSecondaryColor",
-    title: "Secondary Color",
+    configName: "bloodHelperEntityColor",
+    title: "Current Entity Color",
     value: [255, 255, 255, 255],
     subcategory: "Colors",
-    description: "",
+    description: "Current location of the armour stand entity!"
 })
-.addColorPicker({
-    category: "Blood Helper",
-    configName: "bloodHelperFinalColor",
-    title: "Final Color",
-    value: [255, 255, 255, 255],
-    description: "",
-    subcategory: "Colors"
-})
+// .addSwitch({
+//     category: "Blood Helper",
+//     configName: "bloodHelperDynamicColor",
+//     title: "Toggle Dynamic Color",
+//     description: "Automatically decides the color of the prediction in the blood helper.",
+//     subcategory: "Colors",
+// })
+// .addColorPicker({
+//     category: "Blood Helper",
+//     configName: "bloodHelperInitialColor",
+//     title: "Initial Color",
+//     description: "",
+//     value: [255, 255, 255, 255],
+//     subcategory: "Colors"
+// })
+// .addColorPicker({
+//     category: "Blood Helper",
+//     configName: "bloodHelperSecondaryColor",
+//     title: "Secondary Color",
+//     value: [255, 255, 255, 255],
+//     subcategory: "Colors",
+//     description: "",
+// })
+// .addColorPicker({
+//     category: "Blood Helper",
+//     configName: "bloodHelperFinalColor",
+//     title: "Final Color",
+//     value: [255, 255, 255, 255],
+//     description: "",
+//     subcategory: "Colors"
+// })
 .addSwitch({
     category: "Blood Helper",
     configName: "watcherMoveDisplay",
@@ -166,16 +174,25 @@ defConfig
     category: "Blood Helper",
     configName: "bloodHelperAuto",
     title: "Triggerbot",
-    description: "Left clicks wow!",
+    description: "Triggers left click if blood camp assist is active and criteria is met",
     subcategory: "Auto",
 })
 .addTextInput({
     category: "Blood Helper",
     configName: "bloodHelperClickTime",
-    title: "Click Delay",
-    description: "Time at which the mod attempts to left click.",
-    value: "2",
-    placeHolder: "2",
+    title: "Click Distance",
+    description: "Distance between armour stand and prediction at which to trigger a click!",
+    value: "1",
+    placeHolder: "1",
+    subcategory: "Auto",
+})
+.addTextInput({
+    category: "Blood Helper",
+    configName: "bloodHelperFPS",
+    title: "Checks Per Second",
+    description: "Sets the FPS For the STEP Register.\n&cRequires a CT LOAD on modification!",
+    value: "100",
+    placeHolder: "100",
     subcategory: "Auto",
 })
 .addSwitch({

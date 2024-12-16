@@ -19,7 +19,7 @@ defConfig
 .addSwitch({
     category: "Mob ESP",
     configName: "mobESP",
-    title: "&bToggle Mob ESP",
+    title: "&6Toggle Mob ESP",
     description: "Decides wether all features in Mob ESP are &aenabled&7/&cdisabled&7.\n\n&9Mob ESP Credit: &7UnclaimedBloom6",
 })
 .addColorPicker({
@@ -33,7 +33,7 @@ defConfig
 .addSwitch({
     category: "Slot Binding",
     configName: "slotBindingToggle",
-    title: "&bToggle Slot Binding",
+    title: "&6Toggle Slot Binding",
     description: "Decides wether all features in Slot Binding are &aenabled&7/&cdisabled&7."
 })
 .addDropDown({
@@ -78,7 +78,7 @@ defConfig
 .addSwitch({
     category: "Key Four",
     configName: "keyFour",
-    title: "&bToggle Key Four",
+    title: "&6Toggle Key Four",
     description: "Decides wether all features in Key Four are &aenabled&7/&cdisabled&7.",
 })
 .addColorPicker({
@@ -106,7 +106,7 @@ defConfig
 .addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperToggle",
-    title: "&bToggle Blood Helper",
+    title: "&6Toggle Blood Helper",
     description: "Decides wether all features in Blood Helper are &aenabled&7/&cdisabled&7.\n\n&9Blood Helper Credit: &7soshimeeaddons",
 })
 .addColorPicker({
@@ -198,7 +198,7 @@ defConfig
 .addSwitch({
     category: "Drag Prio",
     configName: "dragPrioToggle",
-    title: "&bToggle Drag Prio",
+    title: "&6Toggle Drag Prio",
     description: "Decides wether all features in Drag Prio are &aenabled&7/&cdisabled&7.",
 })
 .addSlider({
@@ -265,7 +265,7 @@ defConfig
 .addSwitch({
     category: "Timers",
     configName: "timerToggle",
-    title: "&bToggle Timers",
+    title: "&6Toggle Timers",
     description: "Decides wether all features in Timers are &aenabled&7/&cdisabled&7.",
 })
 .addSwitch({
@@ -292,7 +292,7 @@ defConfig
 .addSwitch({
     category: "Location Pings",
     configName: "locationMessagesToggle",
-    title: "&bToggle Location Pings",
+    title: "&6Toggle Location Pings",
     description: "Decides wether all features in Location Pings are &aenabled&7/&cdisabled&7.",
 })
 .addSwitch({
@@ -363,14 +363,14 @@ defConfig
 .addSwitch({
     category: "Party Finder",
     configName: "partyFinderToggle",
-    title: "&bToggle Party Finder",
+    title: "&6Toggle Party Finder",
     description: "Decides wether all features in Party Finder are &aenabled&7/&cdisabled&7.",
 })
 // .addSwitch({
 //     category: "Terminals",
 //     configName: "autoMelody",
 //     title: "Auto Melody",
-//     description: "Automatically does the melody terminal for you.\n&bCredits: Soshimee/Cyan",
+//     description: "Automatically does the melody terminal for you.\n&6Credits: Soshimee/Cyan",
 //     subcategory: "Melody",
 // })
 // .addSwitch({
@@ -388,7 +388,7 @@ defConfig
 //     subcategory: "Melody",
 // })
 
-const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§bGhost Client")
+const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§6§lGhost Addons")
 .setPos(15, 15)
 .setSize(70, 70)
 .apply()

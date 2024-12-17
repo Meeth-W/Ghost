@@ -8,11 +8,12 @@ import lowballing from "./lowballing";
 import mobESP from "./mobESP";
 import partyFinder from "./partyFinder";
 import positionalMessages from "./positionalMessages";
+import qol from "./qol";
 import slotBinding from "./slotBinding";
 import timers from "./timers";
 
 export const modules = [
-    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP, keyFour, fastLeap
+    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP, keyFour, fastLeap, qol
 ]
 
 export function refresh_modules() {

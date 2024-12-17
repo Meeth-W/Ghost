@@ -467,6 +467,12 @@ defConfig
 })
 .addSwitch({
     category: "Party Finder",
+    configName: "partyFinderChat",
+    title: "Join Message",
+    description: "Sends a brief overview of the player in party chat!",
+})
+.addSwitch({
+    category: "Party Finder",
     configName: "partyFinderAutoKick",
     title: "Toggle Auto Kick",
     subcategory: "Auto Kick",
@@ -477,7 +483,79 @@ defConfig
     configName: "partyFinderListing",
     title: "Toggle Listing",
     subcategory: "Auto Kick",
-    description: "Enables the Whitelist & Blacklist features.\n\nUse &b//gh autokick&7 to setup",
+    description: "Enables the Whitelist & Blacklist features.\n\nUse &b//autokick&7 to setup",
+})
+.addDropDown({
+    category: "Party Finder",
+    configName: "partyFinderDungeonType",
+    title: "Dungeon Type",
+    description: "Select the floor type to check stats for.",
+    options: ["Catacombs","Master Catacombs"],
+    value: 0,
+    subcategory: "Floor Settings"
+})
+.addDropDown({
+    category: "Party Finder",
+    configName: "partyFinderDungeonFloor",
+    title: "Dungeon Floor",
+    description: "Select the dungeon floor to check stats for.",
+    options: ["1: Bonzo","2: Scarf","3: Professor","4: Thorn","5: Livid","6: Sadan","7: Necron / Wither King"],
+    value: 0,
+    subcategory: "Floor Settings"
+})
+.addSlider({
+    category: "Party Finder",
+    configName: "partyFinderminCata",
+    title: "&cCata Level",
+    description: "",
+    options: [1, 60],
+    value: 1,
+    subcategory: "Requirements"
+})
+.addSlider({
+    category: "Party Finder",
+    configName: "partyFinderminClass",
+    title: "&bClass Level",
+    description: "",
+    options: [1, 55],
+    value: 1,
+    subcategory: "Requirements"
+})
+.addTextInput({
+    category: "Party Finder",
+    configName: "partyFinderPB",
+    title: "&aPersonal Best",
+    description: "",
+    value: "5:00",
+    placeHolder: "5:00",
+    subcategory: "Requirements",
+})
+.addTextInput({
+    category: "Party Finder",
+    configName: "partyFinderMP",
+    title: "&eMagical Power",
+    description: "",
+    value: "1200",
+    placeHolder: "1200",
+    subcategory: "Requirements",
+})
+.addTextInput({
+    category: "Party Finder",
+    configName: "partyFinderSBLevel",
+    title: "&6Skyblock Level",
+    description: "",
+    value: "300",
+    placeHolder: "300",
+    subcategory: "Requirements",
+})
+.addTextInput({
+    category: "Party Finder",
+    configName: "partyFinderminSecrets",
+    title: "&dSecret Count",
+    description: "",
+    subcategory: "Requirements",
+    value: "10k",
+    placeHolder: "10k"
 })
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§6§lGhost Addons")

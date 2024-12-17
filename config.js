@@ -179,6 +179,33 @@ defConfig
     subcategory: "Players"
 })
 .addSwitch({
+    category: "QOL",
+    configName: "qolToggle",
+    title: "&6Toggle Quality of Life &7(&cCheat&7)",
+    description: "Decides wether all features in QOL are &aenabled&7/&cdisabled&7."
+})
+.addSwitch({
+    category: "QOL",
+    configName: "qolGKey",
+    title: "Toggle G Key",
+    description: "Converts the block youre looking at to a ghost block!",
+    subcategory: "G Key",
+})
+.addSwitch({
+    category: "QOL",
+    configName: "qolGKeyCheck",
+    title: "Pickaxe Check",
+    description: "Only triggers gkey if youre holding a pickaxe!",
+    subcategory: "G Key",
+})
+.addSwitch({
+    category: "QOL",
+    configName: "qolnoInteract",
+    title: "Toggle No Interact",
+    description: "Cancels interaction event when clicking on a block while holding pearls.",
+    subcategory: "G Key",
+})
+.addSwitch({
     category: "Key Four",
     configName: "keyFour",
     title: "&6Toggle Key Four &7(&cCheat&7)",

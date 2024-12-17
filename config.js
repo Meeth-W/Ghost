@@ -465,6 +465,20 @@ defConfig
     title: "&6Toggle Party Finder",
     description: "Decides wether all features in Party Finder are &aenabled&7/&cdisabled&7.",
 })
+.addSwitch({
+    category: "Party Finder",
+    configName: "partyFinderAutoKick",
+    title: "Toggle Auto Kick",
+    subcategory: "Auto Kick",
+    description: "Automatically kicks players that do not meet your requirements!",
+})
+.addSwitch({
+    category: "Party Finder",
+    configName: "partyFinderListing",
+    title: "Toggle Listing",
+    subcategory: "Auto Kick",
+    description: "Enables the Whitelist & Blacklist features.\n\nUse &b//gh autokick&7 to setup",
+})
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§6§lGhost Addons")
 .setPos(15, 15)

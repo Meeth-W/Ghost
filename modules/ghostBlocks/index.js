@@ -252,6 +252,7 @@ const i4Coords = [
     { x: 69, y: 221, z: 35, id: 54 }
 ]
 register('command', (args) => {
+    if (!config().toggleCheat) return chat('&cCheats are currently disabled!')
     if (args == 'core') {
         coreCoords.forEach(coord => {
             setBlockAt(coord.x, coord.y, coord.z, coord.id);

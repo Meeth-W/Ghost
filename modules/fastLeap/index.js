@@ -52,7 +52,7 @@ const handleRender = register('renderOverlay', () => {
 }).unregister();
 
 export function toggle() {
-    if (config().fastLeapToggle && config().toggle) {
+    if (config().fastLeapToggle && config().toggle && config().toggleCheat) {
         handleLeap.register();
         if (config().fastLeapGUI) handleRender.register();
         return

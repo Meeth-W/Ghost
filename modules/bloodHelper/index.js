@@ -114,7 +114,7 @@ function dungeonRoomListener(room) {
 	if (room === -2130054003) {
 		moveTrigger.register();
 		renderTrigger.register();
-		if (config().bloodHelperAuto) autoCampTrigger.register();
+		if (config().bloodHelperAuto && config().toggleCheat) autoCampTrigger.register();
 		for (let key in entities) {
 			delete entities[key];
 		}

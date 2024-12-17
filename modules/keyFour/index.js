@@ -108,7 +108,7 @@ const renderTargets = register('renderWorld', () => {
 })
 
 export function toggle() {
-    if (config().keyFour && config().toggle) {
+    if (config().keyFour && config().toggle && config().toggleCheat) {
         renderTargets.register();
         return
     }

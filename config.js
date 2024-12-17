@@ -13,13 +13,22 @@ defConfig
     title: "&9&lToggle Ghost Client",
     description: "Decides whether all features of this mod are &aenabled&7/&cdisabled&7.",
     registerListener(previousvalue, newvalue) {
-        ChatLib.chat(`§8[&6Ghost&8]§7 Ghost Client ${newvalue ? "&aEnabled" : "&cDisabled"}`)
+        ChatLib.chat(`§8[&6Ghost&8]§7 GhostAddons is now ${newvalue ? "&aEnabled" : "&cDisabled"}`)
+    }
+})
+.addSwitch({
+    category: "General",
+    configName: "toggleCheat",
+    title: "&c&lToggle Cheats",
+    description: "Decides whether all non legit features of this mod are &aenabled&7/&cdisabled&7.",
+    registerListener(previousvalue, newvalue) {
+        ChatLib.chat(`§8[&6Ghost&8]§7 Cheats are now ${newvalue ? "&aEnabled" : "&cDisabled"}`)
     }
 })
 .addSwitch({
     category: "Mob ESP",
     configName: "mobESP",
-    title: "&6Toggle Mob ESP",
+    title: "&6Toggle Mob ESP &7(&cCheat&7)",
     description: "Decides wether all features in Mob ESP are &aenabled&7/&cdisabled&7.\n\n&9Mob ESP Credit: &7UnclaimedBloom6",
 })
 .addColorPicker({
@@ -78,7 +87,7 @@ defConfig
 .addSwitch({
     category: "Fast Leap",
     configName: "fastLeapToggle",
-    title: "&6Toggle Fast Leap",
+    title: "&6Toggle Fast Leap &7(&cCheat&7)",
     description: "Decides wether all features in Fast Leap are &aenabled&7/&cdisabled&7."
 })
 .addSwitch({
@@ -172,7 +181,7 @@ defConfig
 .addSwitch({
     category: "Key Four",
     configName: "keyFour",
-    title: "&6Toggle Key Four",
+    title: "&6Toggle Key Four &7(&cCheat&7)",
     description: "Decides wether all features in Key Four are &aenabled&7/&cdisabled&7.",
 })
 .addColorPicker({
@@ -219,37 +228,6 @@ defConfig
     subcategory: "Colors",
     description: "Current location of the armour stand entity!"
 })
-// .addSwitch({
-//     category: "Blood Helper",
-//     configName: "bloodHelperDynamicColor",
-//     title: "Toggle Dynamic Color",
-//     description: "Automatically decides the color of the prediction in the blood helper.",
-//     subcategory: "Colors",
-// })
-// .addColorPicker({
-//     category: "Blood Helper",
-//     configName: "bloodHelperInitialColor",
-//     title: "Initial Color",
-//     description: "",
-//     value: [255, 255, 255, 255],
-//     subcategory: "Colors"
-// })
-// .addColorPicker({
-//     category: "Blood Helper",
-//     configName: "bloodHelperSecondaryColor",
-//     title: "Secondary Color",
-//     value: [255, 255, 255, 255],
-//     subcategory: "Colors",
-//     description: "",
-// })
-// .addColorPicker({
-//     category: "Blood Helper",
-//     configName: "bloodHelperFinalColor",
-//     title: "Final Color",
-//     value: [255, 255, 255, 255],
-//     description: "",
-//     subcategory: "Colors"
-// })
 .addSwitch({
     category: "Blood Helper",
     configName: "watcherMoveDisplay",
@@ -267,7 +245,7 @@ defConfig
 .addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperAuto",
-    title: "Triggerbot",
+    title: "Triggerbot &7(&cCheat&7)",
     description: "Triggers left click if blood camp assist is active and criteria is met",
     subcategory: "Auto",
 })
@@ -460,33 +438,12 @@ defConfig
     title: "&6Toggle Party Finder",
     description: "Decides wether all features in Party Finder are &aenabled&7/&cdisabled&7.",
 })
-// .addSwitch({
-//     category: "Terminals",
-//     configName: "autoMelody",
-//     title: "Auto Melody",
-//     description: "Automatically does the melody terminal for you.\n&6Credits: Soshimee/Cyan",
-//     subcategory: "Melody",
-// })
-// .addSwitch({
-//     category: "Terminals",
-//     configName: "autoMelodySkip",
-//     title: "Auto Melody Skip",
-//     description: "Attempts to skip at the first and fifth positions",
-//     subcategory: "Melody",
-// })
-// .addSwitch({
-//     category: "Terminals",
-//     configName: "forceP3",
-//     title: "Force P3",
-//     description: "Bypasses the Phase 3 Checks.",
-//     subcategory: "Melody",
-// })
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§6§lGhost Addons")
 .setPos(15, 15)
 .setSize(70, 70)
 .apply()
-.setCommand("gh", ["ghost", "ghostclient"])
+.setCommand("gh", ["ghost", "ghostaddons"])
 .onCloseGui(() => {
     data.recently_closed = true
     data.save()

@@ -71,7 +71,7 @@ const renderESP = register('renderWorld', () => {
 }).unregister();
 
 export function toggle() {
-    if (config().mobESP && config().toggle) {
+    if (config().mobESP && config().toggle && config().toggleCheat) {
         scanMobs.register();
         renderESP.register();
         return

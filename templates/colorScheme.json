@@ -146,9 +146,9 @@
         },
         "mouseEnterAnimation": {
             "color": [
-                0,
-                0,
-                0,
+                255,
+                158,
+                66,
                 200
             ],
             "placeholderColor": [
@@ -335,10 +335,10 @@
         },
         "mouseEnterAnimation": {
             "color": [
-                0,
-                0,
-                0,
-                80
+                255,
+                158,
+                66,
+                100
             ],
             "type": "OUT_EXP",
             "time": 0.5
@@ -384,10 +384,10 @@
         },
         "mouseEnterAnimation": {
             "color": [
-                0,
-                0,
-                0,
-                80
+                255,
+                158,
+                66,
+                100
             ],
             "type": "OUT_EXP",
             "time": 0.5
@@ -541,8 +541,8 @@
             "mouseEnterAnimation": {
                 "color": [
                     255,
-                    255,
-                    255,
+                    158,
+                    66,
                     255
                 ],
                 "placeholderColor": [
@@ -647,10 +647,10 @@
             },
             "mouseEnterAnimation": {
                 "color": [
-                    0,
-                    0,
-                    0,
-                    80
+                    255,
+                    158,
+                    66,
+                    100
                 ],
                 "type": "OUT_EXP",
                 "time": 0.5

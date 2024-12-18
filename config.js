@@ -70,6 +70,13 @@ defConfig
     placeHolder: "note.pling",
     subcategory: "Settings"
 })
+.addKeybind({
+    category: "Slot Binding",
+    configName: "slotBindingKeybind",
+    title: "Setup Keybind",
+    description: "Keybind used to edit slot bind preset.",
+    subcategory: "Settings"
+})
 .addSwitch({
     category: "Slot Binding",
     configName: "slotBindingdynamicColoring",
@@ -191,6 +198,13 @@ defConfig
     description: "Converts the block youre looking at to a ghost block!",
     subcategory: "G Key",
 })
+.addKeybind({
+    category: "QOL",
+    configName: "qolGKeyBind",
+    title: "G-Key Bind",
+    description: "The key you want to use for the G Key feature",
+    subcategory: "G Key",
+})
 .addSwitch({
     category: "QOL",
     configName: "qolGKeyCheck",
@@ -203,7 +217,7 @@ defConfig
     configName: "qolnoInteract",
     title: "Toggle No Interact",
     description: "Cancels interaction event when clicking on a block while holding pearls.",
-    subcategory: "G Key",
+    subcategory: "No Interact",
 })
 .addSwitch({
     category: "Key Four",
@@ -389,20 +403,20 @@ defConfig
     subcategory: "Toggles"
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "locationMessagesToggle",
-    title: "&6Toggle Location Pings",
-    description: "Decides wether all features in Location Pings are &aenabled&7/&cdisabled&7.",
+    title: "&6Toggle Location Ping",
+    description: "Decides wether all features in Location Ping are &aenabled&7/&cdisabled&7.",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "locationNotif",
     title: "Alert Toggle",
     description: "Shows a title and plays a sound when a party member sends a location message",
     subcategory: "Location Title",
 })
 .addTextInput({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "locationSound",
     title: "Location Notification Sound",
     description: "Sound used for Location Notification Sound",
@@ -411,49 +425,49 @@ defConfig
     subcategory: "Location Title",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "ssCoord",
     title: "SS Nearby Message",
     subcategory: "Toggle",
     description: "",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "pre2Coord",
     title: "Pre Enter 2 Nearby Message",
     subcategory: "Toggle",
     description: "",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "i3Coord",
     title: "Insta 3 Nearby Message",
     subcategory: "Toggle",
     description: "",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "pre3Coord",
     title: "Pre Enter 3 Nearby Message",
     subcategory: "Toggle",
     description: "",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "pre4Coord",
     title: "Pre Enter 4 Nearby Message",
     subcategory: "Toggle",
     description: "",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "slingshotCoord",
     title: "At Core Message",
     subcategory: "Toggle",
     description: "",
 })
 .addSwitch({
-    category: "Location Pings",
+    category: "Location Ping",
     configName: "tunnelCoord",
     title: "Inside Tunnel Message",
     subcategory: "Toggle",

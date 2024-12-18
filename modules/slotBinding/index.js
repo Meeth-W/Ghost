@@ -2,8 +2,6 @@ import config from "../../config"
 import { data } from "../../utils/data"
 import { chat, getDynamicColor, getPreset, getSlotCoords } from "../../utils/utils"
 
-const bindKey = new KeyBind("Bind Slots", Keyboard.KEY_J, "Ghost")
-
 const getPlayerController = () => Client.getMinecraft().field_71442_b
 const onShiftClick = (slot) => {
     const container = Player.getContainer()
@@ -71,11 +69,11 @@ const mainTrigger = register("guiMouseClick", (x, y, mouseButton, gui, event) =>
     if (!(gui instanceof net.minecraft.client.gui.inventory.GuiInventory)) return
     const slot = gui.getSlotUnderMouse()?.field_75222_d
 
-    if (mouseButton == 1 && Keyboard.isKeyDown(bindKey.getKeyCode())) {
+    if (mouseButton == 1 && Keyboard.isKeyDown(config().slotBindingKeybind)) {
         cancel(event);
         onKeyRightClick(slot);
     }
-    if (mouseButton == 0 && Keyboard.isKeyDown(bindKey.getKeyCode())) {
+    if (mouseButton == 0 && Keyboard.isKeyDown(config().slotBindingKeybind)) {
         cancel(event);
         onKeyLeftClick(slot);
     }

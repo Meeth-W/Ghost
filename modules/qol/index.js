@@ -13,26 +13,33 @@ const handleInteract = register("playerInteract", (action, pos, event) => {
     cancel(event)
 }).unregister();
 
-const gKey = new KeyBind("Ghost Blocks", Keyboard.KEY_NONE, "Ghost");
+let gKeyCooldown = false;
+
 function onGKey() {
-    if (!Player.getHeldItem().getName().removeFormatting().includes('Pickaxe') && config().qolGKeyCheck) return;
+    if (!Player.getHeldItem()?.getName()?.removeFormatting()?.includes('Pickaxe') && config().qolGKeyCheck) return;
 
     const block = Player.lookingAt();
     const blockID = block?.getType()?.getID();
     if (!blockID || blockID == 54 || blockID == 397 || blockID == 0 || blockID == 69 || blockID == 146) return;
     setBlockAt(block.getX(), block.getY(), block.getZ(), 0);
     World.playSound('note.harp', 1, 2);
-    leftClick();    
+    leftClick();
 }
+const handleGKey = register('tick', () => {
+    if (!Keyboard.isKeyDown(config().qolGKeyBind) || gKeyCooldown || Client.isInChat() || Client.isInGui()) return;
+    onGKey()
+    gKeyCooldown = true
+    setTimeout(() => { gKeyCooldown = false }, 200);
+}).unregister();
 
 export function toggle() {
     if (config().qolToggle && config().toggle && config().toggleCheat) {
         if (config().qolnoInteract) handleInteract.register();
-        if (config().qolGKey) gKey.registerKeyPress(onGKey);
+        if (config().qolGKey) handleGKey.register();
         return
     }
     handleInteract.unregister();
-    gKey.unregisterKeyPress();
+    handleGKey.unregister();
     return
 }
 export default { toggle };

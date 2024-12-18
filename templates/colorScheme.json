@@ -971,18 +971,18 @@
     "Keybind": {
         "background": {
             "color": [
-                0,
-                0,
-                0,
-                80
+                50,
+                90,
+                168,
+                200
             ],
             "outlineColor": [
-                255,
-                255,
-                255,
+                0,
+                0,
+                0,
                 255
             ],
-            "outlineSize": 0,
+            "outlineSize": 1,
             "roundness": 3
         },
         "text": {
@@ -993,7 +993,7 @@
                 255
             ],
             "scale": 1,
-            "enabled": "§l****"
+            "enabled": "§6Listening!"
         }
     },
     "Amaterasu": {

@@ -41,7 +41,7 @@ const handleLeap = register(MouseEvent, (event) => {
     rightClick();
 
     leapHelper.queueLeap(leapTo);
-});
+}).unregister();
 
 const handleRender = register('renderOverlay', () => {
     if (getHeldItemID() !== "INFINITE_SPIRIT_LEAP" || !config().fastLeapGUI) return;

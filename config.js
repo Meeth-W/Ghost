@@ -469,21 +469,31 @@ defConfig
     category: "Party Finder",
     configName: "partyFinderChat",
     title: "Join Message",
-    description: "Sends a brief overview of the player in party chat!",
+    subcategory: 'Join Message',
+    description: "Sends a message in party chat when a player joins through party finder.",
+})
+.addTextInput({
+    category: "Party Finder",
+    configName: "partyFinderJoinMsg",
+    title: "Message Text",
+    description: "Customisable Join Message.\nAvailable Variables: &d<username>&7,&d<pb>&7,&d<mp>&7,&d<secrets>&7,&d<sblvl>\n&b/testjoinmsg <username>&7 to test!",
+    value: "o/ <username>!",
+    placeHolder: "o/ <username>!",
+    subcategory: "Join Message",
 })
 .addSwitch({
     category: "Party Finder",
     configName: "partyFinderAutoKick",
     title: "Toggle Auto Kick",
     subcategory: "Auto Kick",
-    description: "Automatically kicks players that do not meet your requirements!",
+    description: "Automatically kicks players that do not meet your requirements!\nWhen enabled, shows a &eKick Check &7along with the &b/stats &7command",
 })
 .addSwitch({
     category: "Party Finder",
     configName: "partyFinderListing",
     title: "Toggle Listing",
     subcategory: "Auto Kick",
-    description: "Enables the Whitelist & Blacklist features.\n\nUse &b//autokick&7 to setup",
+    description: "Enables the Whitelist & Blacklist features.\n\nUse &b/autokick&7 to setup",
 })
 .addDropDown({
     category: "Party Finder",
@@ -502,24 +512,6 @@ defConfig
     options: ["1: Bonzo","2: Scarf","3: Professor","4: Thorn","5: Livid","6: Sadan","7: Necron / Wither King"],
     value: 0,
     subcategory: "Floor Settings"
-})
-.addSlider({
-    category: "Party Finder",
-    configName: "partyFinderminCata",
-    title: "&cCata Level",
-    description: "",
-    options: [1, 60],
-    value: 1,
-    subcategory: "Requirements"
-})
-.addSlider({
-    category: "Party Finder",
-    configName: "partyFinderminClass",
-    title: "&bClass Level",
-    description: "",
-    options: [1, 55],
-    value: 1,
-    subcategory: "Requirements"
 })
 .addTextInput({
     category: "Party Finder",

@@ -68,27 +68,236 @@ function mmssToMillis(mmss) {
 	return (mm * 60 + ss) * 1000;
 }
 
-
-/**
- * Checks wether a player meets the requirements
- * @param {playerData} player 
- */
-function checkKick(player) {
-    // Pb, completions, cata, class, magical power, sb level, secrets, whitelist/blacklist
-    if (config().partyFinderListing && Object.keys(data.partyFinder.whitelist).find(player.player.uuid) != undefined) return [false, `Whitelisted Player: ${data.partyFinder.whitelist[player.player.uuid].reason}`]
-    if (config().partyFinderListing && Object.keys(data.partyFinder.blacklist).find(player.player.uuid) != undefined) return [true, `Blacklisted Player: ${data.partyFinder.blacklist[player.player.uuid].reason}`]
-
-    if (mmssToMillis(config().partyFinderPB) < getPB(player)) return [true, `PB: ${convertToPBTime(getPB(player))} > ${config().partyFinderPB}`]
-    if (parseInt(config().partyFinderMP) > parseInt(player.data.accessories.magical_power)) return [true, `MP: ${formatNumber(parseInt(config().partyFinderMP))} > ${formatNumber(player.data.accessories.magical_power)}`]
-    if (parseInt(config().partyFinderSecrets) > parseInt(player.data.dungeons.secrets)) return [true, `Secrets: ${formatNumber(parseInt(config().partyFinderSecrets))} > ${formatNumber(parseInt(player.data.dungeons.secrets))}`]
-    if (parseInt(config().partyFinderSBLevel) > parseInt(player.data.level.level)) return [true, `SB Level: ${config().partyfinderSBLevel} > ${player.data.level.level}`]
-
-    // TODO: Cata, Class
+function convertExpression(expression) {
+    expression = expression.replace(/,/g, '').replace(/b/g, '*1e9').replace(/m/g, '*1e6').replace(/k/g, '*1e3');
+    return eval(expression);
 }
 
 
-register('command', () => {
-    // TODO: Setup Whitelist
+/**
+ * Checks whether a player meets the requirements
+ * @param {playerData} player 
+ */
+function checkKick(player) {
+    if (!config().partyFinderAutoKick) return [false, 'Auto Kick Disabled!']
+    const uuid = player.player.uuid;
+
+    if (config().partyFinderListing) {
+        if (uuid in data.partyFinder.whitelist) return [false, `Whitelisted Player: ${data.partyFinder.whitelist[uuid].reason}`];
+
+        if (uuid in data.partyFinder.blacklist) return [true, `Blacklisted Player: ${data.partyFinder.blacklist[uuid].reason}`];
+    }
+
+    if (mmssToMillis(config().partyFinderPB) < getPB(player)[1]) {
+        return [true, `PB: ${convertToPBTime(getPB(player)[1])} > ${config().partyFinderPB}`];
+    }
+    if (parseInt(config().partyFinderMP) > parseInt(player.data.accessories.magical_power)) {
+        return [true, `MP: ${formatNumber(parseInt(config().partyFinderMP))} > ${formatNumber(player.data.accessories.magical_power)}`];
+    }
+    if (parseInt(convertExpression(config().partyFinderminSecrets)) > parseInt(player.data.dungeons.secrets)) {
+        return [true, `Secrets: ${(config().partyFinderminSecrets)} > ${formatNumber(parseInt(player.data.dungeons.secrets))}`];
+    }
+    if (parseInt(config().partyFinderSBLevel) > parseInt(player.data.level.level)) {
+        return [true, `SB Level: ${config().partyFinderSBLevel} > ${player.data.level.level}`];
+    }
+
+    return [false, 'Requirements met!'];
+}
+
+
+function handleWhitelist(args) {
+    if (args.length === 1) {
+        const whitelist = data.partyFinder.whitelist || {};
+        if (Object.keys(whitelist).length === 0) return chat('&cWhitelist is empty.');
+        const message = new Message(
+            new TextComponent(`§8[&6Ghost&8]§7 `).setHover('show_text', '&7BooOo'),
+            new TextComponent(`&6Whitelist: `)
+        );
+        const entries = Object.entries(whitelist);
+        entries.forEach(([uuid, entry], index) => {
+            const textComponent = new TextComponent(`§a${entry.username}`)
+                .setHover(
+                    'show_text',
+                    `§7UUID: §e${uuid}\n§7Date: §d${entry.date}\n§7Reason: §b${entry.reason}\n\n§cClick to remove from whitelist!`
+                )
+                .setClick('suggest_command', `/ak whitelist remove ${entry.username}`);
+            message.addTextComponent(textComponent);
+
+            if (index < entries.length - 1) { message.addTextComponent(new TextComponent(' §7| ')); }
+        })
+        return message.chat();
+    }
+
+    const action = args[1].toLowerCase();
+
+    switch (action) {
+        case 'add': {
+            const username = args[2];
+            const reason = args.slice(3).join(' ') || 'No reason provided';
+
+            if (!username) return chat('&cUsage: /autokick whitelist add <username> <reason...>');
+
+            const player = new playerData(username);
+            player.init().then(() => {
+                const uuid = player.player.uuid;
+                const caseSensitiveUsername = player.player.username;
+
+                if (!data.partyFinder.whitelist) data.partyFinder.whitelist = {};
+                if (data.partyFinder.whitelist[uuid]) return chat(`&c${caseSensitiveUsername} is already in the whitelist.`);
+
+                if (data.partyFinder.blacklist && data.partyFinder.blacklist[uuid]) delete data.partyFinder.blacklist[uuid];
+
+                data.partyFinder.whitelist[uuid] = {
+                    username: caseSensitiveUsername,
+                    reason,
+                    date: getCurrentDate(),
+                };
+                data.save();
+                chat(`&a${caseSensitiveUsername} has been added to the whitelist. &7Reason: &b${reason}`);
+            }).catch(() => {
+                chat(`&cFailed to fetch data for &e${username}&c.`);
+            });
+            break;
+        }
+
+        case 'remove': {
+            const username = args[2];
+            if (!username) return chat('&cUsage: /autokick whitelist remove <username>');
+
+            const player = new playerData(username);
+            player.init().then(() => {
+                const uuid = player.player.uuid;
+
+                if (!data.partyFinder.whitelist || !data.partyFinder.whitelist[uuid]) {
+                    return chat(`&c${username} is not in the whitelist.`);
+                }
+
+                delete data.partyFinder.whitelist[uuid];
+                data.save();
+                chat(`&a${username} has been removed from the whitelist.`);
+            }).catch(() => {
+                chat(`&cFailed to fetch data for &e${username}&c.`);
+            });
+            break;
+        }
+
+        default: chat('&cUnknown whitelist action. Use "&eadd&c" or "&eremove&c".');
+    }
+}
+
+function handleBlacklist(args) {
+    if (args.length === 1) {
+        const blacklist = data.partyFinder.blacklist || {};
+        if (Object.keys(blacklist).length === 0) return chat('&cBlacklist is empty.');
+        const message = new Message(
+            new TextComponent(`§8[&6Ghost&8]§7 `).setHover('show_text', '&7BooOo'),
+            new TextComponent(`&6Blacklist: `)
+        );
+        const entries = Object.entries(blacklist);
+        entries.forEach(([uuid, entry], index) => {
+            const textComponent = new TextComponent(`§a${entry.username}`)
+                .setHover(
+                    'show_text',
+                    `§7UUID: §e${uuid}\n§7Date: §d${entry.date}\n§7Reason: §b${entry.reason}\n\n§cClick to remove from blacklist!`
+                )
+                .setClick('suggest_command', `/ak blacklist remove ${entry.username}`);
+            message.addTextComponent(textComponent);
+
+            if (index < entries.length - 1) { message.addTextComponent(new TextComponent(' §7| ')); }
+        })
+        return message.chat();
+    }
+
+    const action = args[1].toLowerCase();
+
+    switch (action) {
+        case 'add': {
+            const username = args[2];
+            const reason = args.slice(3).join(' ') || 'No reason provided';
+
+            if (!username) return chat('&cUsage: /autokick blacklist add <username> <reason...>');
+
+            const player = new playerData(username);
+            player.init().then(() => {
+                const uuid = player.player.uuid;
+                const caseSensitiveUsername = player.player.username;
+
+                if (!data.partyFinder.blacklist) data.partyFinder.blacklist = {};
+                if (data.partyFinder.blacklist[uuid]) return chat(`&c${caseSensitiveUsername} is already in the blacklist.`);
+
+                if (data.partyFinder.whitelist && data.partyFinder.whitelist[uuid]) delete data.partyFinder.whitelist[uuid];
+
+                data.partyFinder.blacklist[uuid] = {
+                    username: caseSensitiveUsername,
+                    reason,
+                    date: getCurrentDate(),
+                };
+                data.save();
+                chat(`&c${caseSensitiveUsername} has been added to the blacklist. &7Reason: &b${reason}`);
+            }).catch(() => {
+                chat(`&cFailed to fetch data for &e${username}&c.`);
+            });
+            break;
+        }
+
+        case 'remove': {
+            const username = args[2];
+            if (!username) return chat('&cUsage: /autokick blacklist remove <username>');
+
+            const player = new playerData(username);
+            player.init().then(() => {
+                const uuid = player.player.uuid;
+
+                if (!data.partyFinder.blacklist || !data.partyFinder.blacklist[uuid]) return chat(`&c${username} is not in the blacklist.`);
+
+                delete data.partyFinder.blacklist[uuid];
+                data.save();
+                chat(`&a${username} has been removed from the blacklist.`);
+            }).catch(() => {
+                chat(`&cFailed to fetch data for &e${username}&c.`);
+            });
+            break;
+        }
+
+        default: chat('&cUnknown blacklist action. Use "&eadd&c" or "&eremove&c".');
+    }
+}
+
+function getCurrentDate() {
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = String(now.getFullYear()).slice(-2);
+    return `${day}/${month}/${year}`;
+}
+
+register('command', (...args) => {
+    if (args.length === 0 || !args[0]) {
+        chat('&6/autokick Commands:');
+        chat('&e/autokick whitelist &7- Displays the whitelist.');
+        chat('&e/autokick blacklist &7- Displays the blacklist.');
+        chat('&e/autokick whitelist add <username> <reason...> &7- Adds a user to the whitelist.');
+        chat('&e/autokick whitelist remove <username> &7- Removes a user from the whitelist.');
+        chat('&e/autokick blacklist add <username> <reason...> &7- Adds a user to the blacklist.');
+        chat('&e/autokick blacklist remove <username> &7- Removes a user from the blacklist.');
+        return;
+    }
+
+    const subCommand = args[0]?.toLowerCase();
+
+    switch (subCommand) {
+        case 'whitelist':
+            handleWhitelist(args);
+            break;
+
+        case 'blacklist':
+            handleBlacklist(args);
+            break;
+
+        default:
+            chat(`&cUnknown subcommand: &e${subCommand}`);
+            chat('&6Use &e/autokick &6to view the list of available commands.');
+    }
 }).setName('autokick').setAliases('ak');
 
 
@@ -126,6 +335,28 @@ const chatTrigger = register('chat', (username, _, __) => {
                 );
             };
             msg.chat()
+            const [kick, reason] = checkKick(player);
+            if (config().partyFinderAutoKick) {
+                if (kick) {
+                    ChatLib.chat(`/party chat Kicking ${username} » ${reason}`);
+                    setTimeout(() => { ChatLib.command(`/party kick ${username}`); }, 300);
+                    return;
+                }
+            }
+            if (config().partyFinderChat) {
+                try {
+                    let joinMessage = config().partyFinderJoinMsg || "Welcome <username>!";
+                    joinMessage = joinMessage.replace('<username>', player.player.username)
+                                            .replace('<pb>', convertToPBTime(getPB(player)[1]) || "No PB")
+                                            .replace('<mp>', player.data.accessories.magical_power? formatNumber(player.data.accessories.magical_power) : "NO API")
+                                            .replace('<secrets>', formatNumber(parseInt(player.data.secrets)) || "0")
+                                            .replace('<sblvl>', player.data.level.level);
+                    ChatLib.command(`/party chat ${joinMessage}`);
+                } catch (error) {
+                    console.error("Error while formatting the join message:", error);
+                    chat("An error occurred while generating the join message.");
+                }
+            }
         })
     })
 }).setCriteria("Party Finder > ${username} joined the dungeon group! (${_} Level ${__})").unregister();
@@ -164,6 +395,10 @@ register('command', (username) => {
             };
             World.playSound('note.pling', '2', '1');
             msg.chat()
+            if (config().partyFinderAutoKick) {
+                toKick = checkKick(player);
+                chat(`&7Kick Check: &a${toKick[0]} &7, Reason: &a${toKick[1]}`);
+            }
         })
     })
 }).setName('nicepb').setAliases('stats')
@@ -171,17 +406,39 @@ register('command', (username) => {
 register('command', (username) => {
     if (!username) username = Player.getName();
     const player = new playerData(username);
+    
     player.init().then(() => {
         player.getData().then(() => {
-            let msg = null;
+            try {
+                let joinMessage = config().partyFinderJoinMsg || "Welcome <username>!";
+                joinMessage = joinMessage.replace('<username>', player.player.username)
+                                        .replace('<pb>', convertToPBTime(getPB(player)[1]) || "No PB")
+                                        .replace('<mp>', player.data.accessories.magical_power? formatNumber(player.data.accessories.magical_power) : "NO API")
+                                        .replace('<secrets>', formatNumber(parseInt(player.data.secrets)) || "0")
+                                        .replace('<sblvl>', player.data.level.level);                
+                chat(joinMessage);
+            } catch (error) {
+                console.error("Error while formatting the join message:", error);
+                chat("An error occurred while generating the join message.");
+            }
+        });
+    });
+}).setName('testjoinmsg');
+
+
+register('command', (username) => {
+    if (!username) username = Player.getName();
+    const player = new playerData(username);
+    player.init().then(() => {
+        player.getData().then(() => {
             if (!player.data.apiStatus) {
+                chat(`${player.player.username}'s Armour:`)
                 player.data.gear.armour.forEach(item => {
                     chat(item.tag.display.Name.replace(/¿/g, '✿').replace(/ª/g, '✪').replace(/[^a-z0-9§& ✿✪]/gi, ''))
                 })
-                msg = new Message( ...newList );
             } else {
                 World.playSound('note.pling', '2', '1');
-                msg = new Message(
+                new Message(
                     new TextComponent(`§8[&6Ghost&8]§7 &cAPI Disabled.`).setHover('show_text', '&7BooOo'),
                 ).chat();
             };

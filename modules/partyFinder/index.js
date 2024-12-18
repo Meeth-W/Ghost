@@ -338,8 +338,8 @@ const chatTrigger = register('chat', (username, _, __) => {
             const [kick, reason] = checkKick(player);
             if (config().partyFinderAutoKick) {
                 if (kick) {
-                    ChatLib.chat(`/party chat Kicking ${username} » ${reason}`);
-                    setTimeout(() => { ChatLib.command(`/party kick ${username}`); }, 300);
+                    ChatLib.command(`party chat Kicking ${username} » ${reason}`);
+                    setTimeout(() => { ChatLib.command(`party kick ${username}`); }, 300);
                     return;
                 }
             }
@@ -351,7 +351,7 @@ const chatTrigger = register('chat', (username, _, __) => {
                                             .replace('<mp>', player.data.accessories.magical_power? formatNumber(player.data.accessories.magical_power) : "NO API")
                                             .replace('<secrets>', formatNumber(parseInt(player.data.secrets)) || "0")
                                             .replace('<sblvl>', player.data.level.level);
-                    ChatLib.command(`/party chat ${joinMessage}`);
+                    ChatLib.command(`party chat ${joinMessage}`);
                 } catch (error) {
                     console.error("Error while formatting the join message:", error);
                     chat("An error occurred while generating the join message.");

@@ -51,7 +51,7 @@ export function isInDungeon() {
 
 /**
  * Returns the selected slot binding preset from the config.
- * @returns Integer
+ * @returns Integerfor
  */
 export function getPreset() {
     if (!config().slotBindingautoSelect) return config().slotBindingPreset
@@ -183,6 +183,7 @@ export function capitalize(str) {
  * @returns String
  */
 export function abbreviateNumber(num) {
+    if (!num) return 'NULL'
     if (num >= 1e12) {
         return (num / 1e12).toFixed(1).replace(/\.0$/, '') + 'T'; // Trillions
     } else if (num >= 1e9) {
@@ -202,6 +203,7 @@ export function abbreviateNumber(num) {
  * @returns String
  */
 export function formatNumber(num) {
+    if (!num) return 'NULL'
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 

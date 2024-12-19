@@ -1,5 +1,6 @@
+import { renderBoxFromCorners } from "../../../BloomCore/RenderUtils"
 import config from "../../config"
-import { chat, inRange } from "../../utils/utils"
+import { chat, inRange, isInBoss, isInP3 } from "../../utils/utils"
 
 let text = new Text('').setScale(2).setShadow(true).setAlign('CENTER').setColor(Renderer.RED)
 let startTime
@@ -58,6 +59,14 @@ const goldorEnd = register('chat', () => {
     messagesSent.pre3[0] = true
     messagesSent.pre4[0] = true
 }).setCriteria("The Core entrance is opening!").unregister()
+
+const handleRender = register('renderWorld', () => {
+    if (!isInP3() || !isInBoss() || !config().locationOverlay) return;
+    Object.keys(messagesSent).forEach(key => {
+        const [sent, [x1, x2], [y1, y2], [z1, z2]] = messagesSent[key];
+        if (!sent) renderBoxFromCorners(x1, y1, z1, x2, y2, z2, 1, 1, 1, 1, false);
+    })
+}).unregister();
 
 const mainTrigger = register('tick', () => {
     if (!messagesSent.ssMessage[0] && config().ssCoord && inRange(messagesSent.ssMessage)) {
@@ -130,6 +139,7 @@ export function toggle() {
             locationNotifTrigger.register()
             locationNotifRender.register()
         }
+        if (config().locationOverlay) handleRender.register()
         stormEnd.register()
         goldorStart.register()
         maxorEnd.register()
@@ -147,6 +157,7 @@ export function toggle() {
     maxorEnd.unregister()
     goldorEnd.unregister()
     mainTrigger.unregister()
+    handleRender.unregister()
     return
 }
 export default { toggle };

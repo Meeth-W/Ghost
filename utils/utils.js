@@ -432,3 +432,37 @@ export function getClasses() {
     for (let ign in party) { classes[party[ign].class] = ign; }
     return classes;
 }
+
+let InBoss = false;
+let InP3 = false;
+
+let BossEntryMessage = [
+    "[BOSS] Bonzo: Gratz for making it this far, but I'm basically unbeatable.",
+    "[BOSS] Scarf: This is where the journey ends for you, Adventurers.",
+    "[BOSS] The Professor: I was burdened with terrible news recently...",
+    "[BOSS] Thorn: Welcome Adventurers! I am Thorn, the Spirit! And host of the Vegan Trials!",
+    "[BOSS] Livid: Welcome, you've arrived right on time. I am Livid, the Master of Shadows.",
+    "[BOSS] Sadan: So you made it all the way here... Now you wish to defy me? Sadan?!",
+    "[BOSS] Maxor: WELL! WELL! WELL! LOOK WHO'S HERE!"
+]
+const handleChat = register('chat', (event) => {
+    const message = ChatLib.getChatMessage(event, false)
+    if (BossEntryMessage.some(bossMessage => message.includes(bossMessage))) {
+        InBoss = true;
+    }
+    if (['[BOSS] Goldor: Who dares trespass into my domain?', '[BOSS] Goldor: But you have nowhere to hide anymore!'].some(bossMessage => message.includes(bossMessage))) {
+        InP3 = true;
+    }
+}).unregister();
+
+const handleWorld = register('worldLoad', () => {
+    InBoss = false;
+    InP3 = false;
+});
+
+// These registers are always on :pray: sorryidk a work around man
+handleChat.register();
+handleWorld.register();
+
+export const isInBoss = () => { return InBoss }
+export const isInP3 = () => { return InP3 }

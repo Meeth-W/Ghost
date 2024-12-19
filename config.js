@@ -426,6 +426,13 @@ defConfig
 })
 .addSwitch({
     category: "Location Ping",
+    configName: "locationOverlay",
+    title: "Area Highlight",
+    description: "Renders the area where location pings proc!",
+    subcategory: "Location Highlight",
+})
+.addSwitch({
+    category: "Location Ping",
     configName: "ssCoord",
     title: "SS Nearby Message",
     subcategory: "Toggle",

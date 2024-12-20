@@ -146,7 +146,7 @@ const handleCommand = register('command', () => {
 	renderTrigger.register();
 	if (config().bloodHelperAuto && config().toggleCheat) autoCampTrigger.register();
 	for (let key in entities) { delete entities[key]; }
-});
+}).setName('forceblood');
 
 export function toggle() {
     if (config().bloodHelperToggle && config().toggle) {

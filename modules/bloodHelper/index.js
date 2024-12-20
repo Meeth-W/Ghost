@@ -140,6 +140,14 @@ const helperTrigger = register("step", () => {
 	}
 }).setFps(1).unregister();
 
+const handleCommand = register('command', () => {
+	chat(`Force starting blood helper!`)
+	moveTrigger.register();
+	renderTrigger.register();
+	if (config().bloodHelperAuto && config().toggleCheat) autoCampTrigger.register();
+	for (let key in entities) { delete entities[key]; }
+});
+
 export function toggle() {
     if (config().bloodHelperToggle && config().toggle) {
         helperTrigger.register()

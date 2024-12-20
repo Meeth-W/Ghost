@@ -1,5 +1,5 @@
 import config from "../../config";
-import { chat, setBlockAt } from "../../utils/utils";
+import { chat, isInBoss, setBlockAt } from "../../utils/utils";
 
 const coreCoords = [
     { x: 57, y: 123, z: 122, id: 139 },
@@ -253,6 +253,7 @@ const i4Coords = [
 ]
 register('command', (args) => {
     if (!config().toggleCheat) return chat('&cCheats are currently disabled!')
+    if (!isInBoss()) return chat(`&cNot in boss room!`)
     if (args == 'core') {
         coreCoords.forEach(coord => {
             setBlockAt(coord.x, coord.y, coord.z, coord.id);

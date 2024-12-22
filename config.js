@@ -106,6 +106,15 @@ defConfig
 })
 .addDropDown({
     category: "Fast Leap",
+    configName: "fastLeapClear",
+    title: "Clear",
+    description: "\n&6Always leaps to this player in clear!\n\n&7Usually &6Archer&7/&bMage",
+    options: ["Mage","Archer","Berserk","Healer","Tank",],
+    value: 2,
+    subcategory: "Players"
+})
+.addDropDown({
+    category: "Fast Leap",
     configName: "fastLeapP1",
     title: "P1",
     description: "\n&6Phase 1&7 -> &6Phase 2\n\n&7Usually &cBerserk",

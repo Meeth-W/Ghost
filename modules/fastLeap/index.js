@@ -1,5 +1,5 @@
 import config from "../../config";
-import { chat, getClasses, getHeldItemID, getPhase, rightClick } from "../../utils/utils";
+import { chat, getClasses, getHeldItemID, getPhase, isInBoss, rightClick } from "../../utils/utils";
 import leapHelper from '../../utils/leap'
 
 export const MouseEvent = Java.type("net.minecraftforge.client.event.MouseEvent")
@@ -18,6 +18,8 @@ function getLeap() {
     else if (phase == 3.5) { target = getClasses()[order[config().fastLeapP3Core]] }
     else if (phase == 4) { target = getClasses()[order[config().fastLeapP4]] }
     else if (phase == 5) { target = getClasses()[order[config().fastLeapRelic]]}
+
+    if (!isInBoss()) { target = getClasses()[order[config().fastLeapClear]] }
     
     if (target && target.toLowerCase() == Player.getName().toLowerCase()) target = null
     return target;

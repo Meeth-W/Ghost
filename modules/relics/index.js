@@ -181,6 +181,7 @@ const relicAura = register('tick', () => {
 const handleAura = register('chat', () => {
     if (!config().relicAura) return;
     chat(`&c&lStarting Relic Aura!`)
+    relicAura.register();
 
     const trigger = register('worldLoad', () => {
         trigger.unregister();
@@ -192,7 +193,7 @@ const handleAura = register('chat', () => {
 
 
 // Handling Look //
-const handleLook = register("packetSent", (packet) => {
+const lookTrigger = register("packetSent", (packet) => {
     const entity = packet.func_149564_a(World.getWorld())
     if (!entity instanceof ArmorStand) return
     const entityWornHelmet = entity.func_82169_q(3)
@@ -200,7 +201,7 @@ const handleLook = register("packetSent", (packet) => {
     const helmetName = ChatLib.removeFormatting(new Item(entityWornHelmet).getName())
     if (!helmetName.includes("Relic")) return;
 
-    handleLook.unregister()
+    lookTrigger.unregister()
 
     if (config().relicLook) {
         if (helmetName === "Corrupted Orange Relic") {
@@ -216,6 +217,19 @@ const handleLook = register("packetSent", (packet) => {
     }
 }).setFilteredClass(net.minecraft.network.play.client.C02PacketUseEntity).unregister()
 
+
+const handleLook = register('chat', () => {
+    if (!config().relicLook) return;
+    chat(`&c&lStarting Relic Look!`)
+    lookTrigger.register()
+
+    const trigger = register('worldLoad', () => {
+        trigger.unregister();
+        chat('&c&lForce Stopping Relic Look!')
+
+        lookTrigger.unregister();
+    })
+}).setCriteria("[BOSS] Necron: All this, for nothing...").unregister();
 
 // Handling Placement // 
 const cauldrons = {
@@ -292,6 +306,11 @@ const handleBrush = register('chat', () => {
 // Handling Timers //
 // icba at this point man plz skid this shit from valley :pray:
 
+
+register('command', () => {
+    const [yaw, pitch] = calcYawPitch({ x: 52, y: 7.5, z: 42 })
+            snapTo(yaw, pitch)
+}).setName('testtest')
 
 export function toggle() {
     if (config().relicToggle && config().toggle && config().toggleCheat) {

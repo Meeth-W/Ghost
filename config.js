@@ -412,6 +412,54 @@ defConfig
     subcategory: "Toggles"
 })
 .addSwitch({
+    category: "Relics",
+    configName: "relicToggle",
+    title: "&6Toggle Relics",
+    description: "Decides wether all features in Relics are &aenabled&7/&cdisabled&7.",
+})
+.addSwitch({
+    category: "Relics",
+    configName: "blinkRelics",
+    title: "Blink Relics",
+    description: "Instantly teleports you to the correct cauldron (&cRed&7/&6Orange&7).\nRequires &b28 ticks&7 of charging, &eRelic Look&7 and &eRelic Triggerbot&7.",
+    subcategory: "Blink"
+})
+.addSwitch({
+    category: "Relics",
+    configName: "relicConfig",
+    title: "Brush",
+    description: "Automatically places brush config for relics when near the right statue (&cRed&7/&6Orange&7).\nStand on the &bDiamond Block&7.",
+    subcategory: "Blink"
+})
+.addSwitch({
+    category: "Relics",
+    configName: "relicLook",
+    title: "Look",
+    description: "Automatically rotates you towards the right cauldron (&cRed&7/&6Orange&7).",
+    subcategory: "Auto"
+})
+.addSwitch({
+    category: "Relics",
+    configName: "relicTriggerbot",
+    title: "Triggerbot",
+    description: "Automatically clicks the correct cauldron for you.",
+    subcategory: "Auto"
+})
+.addSwitch({
+    category: "Relics",
+    configName: "relicAura",
+    title: "Aura",
+    description: "Automatically picks up the closest relic.",
+    subcategory: "Auto"
+})
+.addSwitch({
+    category: "Relics",
+    configName: "relicTimers",
+    title: "Relic Timer",
+    description: "Automatically picks up the closest relic.",
+    subcategory: "Auto"
+})
+.addSwitch({
     category: "Location Ping",
     configName: "locationMessagesToggle",
     title: "&6Toggle Location Ping",

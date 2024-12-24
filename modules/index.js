@@ -1,3 +1,4 @@
+import autoEquip from "./autoEquip";
 import bloodHelper from "./bloodHelper";
 import bloodSplits from "./bloodSplits";
 import dragPrio from "./dragPrio";

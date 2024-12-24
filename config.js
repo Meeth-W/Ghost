@@ -627,6 +627,54 @@ defConfig
     value: "10k",
     placeHolder: "10k"
 })
+.addSwitch({
+    category: "Equipment",
+    configName: "equipToggle",
+    title: "&6Toggle Equipment",
+    description: "Decides wether all features in Equipment are &aenabled&7/&cdisabled&7.",
+})
+.addSwitch({
+    category: "Equipment",
+    configName: "equipAuto",
+    title: "&dToggle Auto",
+    description: "Automatically equips a different helmet on certain triggers.",
+})
+.addTextInput({
+    category: "Equipment",
+    configName: "equipOnPhoenix",
+    title: "&6Phoenix",
+    description: "Your Phoenix Pet saved you from certain death!",
+    subcategory: "Settings",
+    value: "Spirit Mask",
+    placeHolder: "Spirit Mask"
+})
+.addTextInput({
+    category: "Equipment",
+    configName: "equipOnSpirit",
+    title: "&fSpirit",
+    description: "Second Wind Activated! Your Spirit Mask saved your life!",
+    subcategory: "Settings",
+    value: "Bonzo's Mask",
+    placeHolder: "Bonzo's Mask"
+})
+.addTextInput({
+    category: "Equipment",
+    configName: "equipOnBonzo",
+    title: "&9Bonzo's Mask",
+    description: "Your ⚚ Bonzo's Mask saved your life!",
+    subcategory: "Settings",
+    value: "Racing Helmet",
+    placeHolder: "Racing Helmet"
+})
+.addTextInput({
+    category: "Equipment",
+    configName: "equipOnBoss",
+    title: "&4Boss Entry",
+    description: "[BOSS] Maxor: WELL! WELL! WELL! LOOK WHO'S HERE!",
+    subcategory: "Settings",
+    value: "Diamond Necron Head",
+    placeHolder: "Diamond Necron Head"
+})
 
 const config = new Settings("Ghost", defConfig, "templates/colorScheme.json", "§6§lGhost Addons")
 .setPos(15, 15)

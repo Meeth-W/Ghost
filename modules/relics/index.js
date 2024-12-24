@@ -75,7 +75,8 @@ const packetCollector = register("packetSent", (packet, event) => {
 const renderText = register("renderOverlay", () => {
     Renderer.scale(1.5)
     const text = `§6§lCharging Blink: §r§c${standStillTicks - ticksStill} ticks.`
-    Renderer.drawString(text, Renderer.screen.getWidth() / 4 - Renderer.getStringWidth(text) / 2, Renderer.screen.getHeight() / 3.8)
+    // Renderer.drawString(text, Renderer.screen.getWidth() / 4 - Renderer.getStringWidth(text) / 2, Renderer.screen.getHeight() / 3.8)
+    Renderer.drawString(text, (Renderer.screen.getWidth() / 1.5 - Renderer.getStringWidth(text)) / 2, Renderer.screen.getHeight() / 1.5 / 2 - 16);
 }).unregister()
 
 const relicClickListener = register("packetSent", (packet) => {
@@ -172,7 +173,6 @@ const relicAura = register('tick', () => {
     const armorStands = World.getAllEntitiesOfType(ArmorStand)
     const entity = armorStands.find(e => new EntityLivingBase(e?.getEntity()).getItemInSlot(4)?.getNBT()?.toString()?.includes("Relic") && getDistanceToEntity(e) < 4)
     if (!entity) return
-    chat(getDistanceToEntity(entity))
     interactWithEntity(entity.getEntity())
     Client.scheduleTask(1, () => relicAura.unregister())
 })
@@ -306,11 +306,6 @@ const handleBrush = register('chat', () => {
 // Handling Timers //
 // icba at this point man plz skid this shit from valley :pray:
 
-
-register('command', () => {
-    const [yaw, pitch] = calcYawPitch({ x: 52, y: 7.5, z: 42 })
-            snapTo(yaw, pitch)
-}).setName('testtest')
 
 export function toggle() {
     if (config().relicToggle && config().toggle && config().toggleCheat) {

@@ -278,6 +278,14 @@ defConfig
     subcategory: "Colors",
     description: "Current location of the armour stand entity!"
 })
+.addColorPicker({
+    category: "Blood Helper",
+    configName: "bloodHelperWatcherColor",
+    title: "Watcher Color",
+    value: [255, 0, 0, 255],
+    subcategory: "Colors",
+    description: "Current location of the watcer entity!"
+})
 .addSwitch({
     category: "Blood Helper",
     configName: "watcherMoveDisplay",

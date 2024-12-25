@@ -65,109 +65,109 @@ export default class playerData {
                     level: profile?.data?.slayer?.slayers?.spider?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.spider?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.spider?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.spider?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.spider?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.spider?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.spider?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.spider?.kills?.["1"] ?? 0,
+                        t2: profile?.data?.slayer?.slayers?.spider?.kills?.["2"] ?? 0,
+                        t3: profile?.data?.slayer?.slayers?.spider?.kills?.["3"] ?? 0,
+                        t4: profile?.data?.slayer?.slayers?.spider?.kills?.["4"] ?? 0,
+                        total: profile?.data?.slayer?.slayers?.spider?.kills?.["total"] ?? 0,
                     }
                 },
                 zombie: {
                     level: profile?.data?.slayer?.slayers?.zombie?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.zombie?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.zombie?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.zombie?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.zombie?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.zombie?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.zombie?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.zombie?.kills?.["1"] ?? 0,
+                        t2: profile?.data?.slayer?.slayers?.zombie?.kills?.["2"] ?? 0,
+                        t3: profile?.data?.slayer?.slayers?.zombie?.kills?.["3"] ?? 0,
+                        t4: profile?.data?.slayer?.slayers?.zombie?.kills?.["4"] ?? 0,
+                        total: profile?.data?.slayer?.slayers?.zombie?.kills?.["total"] ?? 0,
                     }
                 },
                 wolf: {
                     level: profile?.data?.slayer?.slayers?.wolf?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.wolf?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.wolf?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.wolf?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.wolf?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.wolf?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.wolf?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.wolf?.kills?.["1"] ?? 0,
+                        t2: profile?.data?.slayer?.slayers?.wolf?.kills?.["2"] ?? 0,
+                        t3: profile?.data?.slayer?.slayers?.wolf?.kills?.["3"] ?? 0,
+                        t4: profile?.data?.slayer?.slayers?.wolf?.kills?.["4"] ?? 0,
+                        total: profile?.data?.slayer?.slayers?.wolf?.kills?.["total"] ?? 0,
                     }
                 },
                 enderman: {
                     level: profile?.data?.slayer?.slayers?.enderman?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.enderman?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.enderman?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.enderman?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.enderman?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.enderman?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.enderman?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.enderman?.kills?.["1"] ?? 0,
+                        t2: profile?.data?.slayer?.slayers?.enderman?.kills?.["2"] ?? 0,
+                        t3: profile?.data?.slayer?.slayers?.enderman?.kills?.["3"] ?? 0,
+                        t4: profile?.data?.slayer?.slayers?.enderman?.kills?.["4"] ?? 0,
+                        total: profile?.data?.slayer?.slayers?.enderman?.kills?.["total"] ?? 0,
                     }
                 },
                 blaze: {
                     level: profile?.data?.slayer?.slayers?.blaze?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.blaze?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.blaze?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.blaze?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.blaze?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.blaze?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.blaze?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.blaze?.kills?.["1"] ?? 0,
+                        t2: profile?.data?.slayer?.slayers?.blaze?.kills?.["2"] ?? 0,
+                        t3: profile?.data?.slayer?.slayers?.blaze?.kills?.["3"] ?? 0,
+                        t4: profile?.data?.slayer?.slayers?.blaze?.kills?.["4"] ?? 0,
+                        total: profile?.data?.slayer?.slayers?.blaze?.kills?.["total"] ?? 0,
                     }
                 },
                 vampire: {
                     level: profile?.data?.slayer?.slayers?.vampire?.level?.currentLevel,
                     experience: profile?.data?.slayer?.slayers?.vampire?.level?.xp,
                     kills: {
-                        t1: profile?.data?.slayer?.slayers?.vampire?.kills["1"],
-                        t2: profile?.data?.slayer?.slayers?.vampire?.kills["2"],
-                        t3: profile?.data?.slayer?.slayers?.vampire?.kills["3"],
-                        t4: profile?.data?.slayer?.slayers?.vampire?.kills["4"],
-                        total: profile?.data?.slayer?.slayers?.vampire?.kills["total"],
+                        t1: profile?.data?.slayer?.slayers?.vampire?.kills?.["1"] ?? 0,
+                        t2: profile?.data?.slayer?.slayers?.vampire?.kills?.["2"] ?? 0,
+                        t3: profile?.data?.slayer?.slayers?.vampire?.kills?.["3"] ?? 0,
+                        t4: profile?.data?.slayer?.slayers?.vampire?.kills?.["4"] ?? 0,
+                        total: profile?.data?.slayer?.slayers?.vampire?.kills?.["total"] ?? 0,
                     }
                 }
             }
             this.data.dungeons = {
                 completions: {
                     catacombs: {
-                        f1: profile?.data?.dungeons?.catacombs?.floors["1"]?.stats?.tier_completions,
-                        f2: profile?.data?.dungeons?.catacombs?.floors["2"]?.stats?.tier_completions,
-                        f3: profile?.data?.dungeons?.catacombs?.floors["3"]?.stats?.tier_completions,
-                        f4: profile?.data?.dungeons?.catacombs?.floors["4"]?.stats?.tier_completions,
-                        f5: profile?.data?.dungeons?.catacombs?.floors["5"]?.stats?.tier_completions,
-                        f6: profile?.data?.dungeons?.catacombs?.floors["6"]?.stats?.tier_completions,
-                        f7: profile?.data?.dungeons?.catacombs?.floors["7"]?.stats?.tier_completions
+                        f1: profile?.data?.dungeons?.catacombs?.floors?.["1"]?.stats?.tier_completions,
+                        f2: profile?.data?.dungeons?.catacombs?.floors?.["2"]?.stats?.tier_completions,
+                        f3: profile?.data?.dungeons?.catacombs?.floors?.["3"]?.stats?.tier_completions,
+                        f4: profile?.data?.dungeons?.catacombs?.floors?.["4"]?.stats?.tier_completions,
+                        f5: profile?.data?.dungeons?.catacombs?.floors?.["5"]?.stats?.tier_completions,
+                        f6: profile?.data?.dungeons?.catacombs?.floors?.["6"]?.stats?.tier_completions,
+                        f7: profile?.data?.dungeons?.catacombs?.floors?.["7"]?.stats?.tier_completions
                     },
                     master_catacombs: {
-                        m1: profile?.data?.dungeons?.master_catacombs?.floors["1"]?.stats?.tier_completions,
-                        m2: profile?.data?.dungeons?.master_catacombs?.floors["2"]?.stats?.tier_completions,
-                        m3: profile?.data?.dungeons?.master_catacombs?.floors["3"]?.stats?.tier_completions,
-                        m4: profile?.data?.dungeons?.master_catacombs?.floors["4"]?.stats?.tier_completions,
-                        m5: profile?.data?.dungeons?.master_catacombs?.floors["5"]?.stats?.tier_completions,
-                        m6: profile?.data?.dungeons?.master_catacombs?.floors["6"]?.stats?.tier_completions,
-                        m7: profile?.data?.dungeons?.master_catacombs?.floors["7"]?.stats?.tier_completions
+                        m1: profile?.data?.dungeons?.master_catacombs?.floors?.["1"]?.stats?.tier_completions,
+                        m2: profile?.data?.dungeons?.master_catacombs?.floors?.["2"]?.stats?.tier_completions,
+                        m3: profile?.data?.dungeons?.master_catacombs?.floors?.["3"]?.stats?.tier_completions,
+                        m4: profile?.data?.dungeons?.master_catacombs?.floors?.["4"]?.stats?.tier_completions,
+                        m5: profile?.data?.dungeons?.master_catacombs?.floors?.["5"]?.stats?.tier_completions,
+                        m6: profile?.data?.dungeons?.master_catacombs?.floors?.["6"]?.stats?.tier_completions,
+                        m7: profile?.data?.dungeons?.master_catacombs?.floors?.["7"]?.stats?.tier_completions
                     },
                     total: profile?.data?.dungeons?.floor_completions
                 },
                 best_runs: {
                     catacombs: {
-                        f1: profile?.data?.dungeons?.catacombs?.floors["1"]?.stats?.fastest_time_s_plus,
-                        f2: profile?.data?.dungeons?.catacombs?.floors["2"]?.stats?.fastest_time_s_plus,
-                        f3: profile?.data?.dungeons?.catacombs?.floors["3"]?.stats?.fastest_time_s_plus,
-                        f4: profile?.data?.dungeons?.catacombs?.floors["4"]?.stats?.fastest_time_s_plus,
-                        f5: profile?.data?.dungeons?.catacombs?.floors["5"]?.stats?.fastest_time_s_plus,
-                        f6: profile?.data?.dungeons?.catacombs?.floors["6"]?.stats?.fastest_time_s_plus,
-                        f7: profile?.data?.dungeons?.catacombs?.floors["7"]?.stats?.fastest_time_s_plus
+                        f1: profile?.data?.dungeons?.catacombs?.floors?.["1"]?.stats?.fastest_time_s_plus,
+                        f2: profile?.data?.dungeons?.catacombs?.floors?.["2"]?.stats?.fastest_time_s_plus,
+                        f3: profile?.data?.dungeons?.catacombs?.floors?.["3"]?.stats?.fastest_time_s_plus,
+                        f4: profile?.data?.dungeons?.catacombs?.floors?.["4"]?.stats?.fastest_time_s_plus,
+                        f5: profile?.data?.dungeons?.catacombs?.floors?.["5"]?.stats?.fastest_time_s_plus,
+                        f6: profile?.data?.dungeons?.catacombs?.floors?.["6"]?.stats?.fastest_time_s_plus,
+                        f7: profile?.data?.dungeons?.catacombs?.floors?.["7"]?.stats?.fastest_time_s_plus
                     },
                     master_catacombs: {
-                        m1: profile?.data?.dungeons?.master_catacombs?.floors["1"]?.stats?.fastest_time_s_plus,
-                        m2: profile?.data?.dungeons?.master_catacombs?.floors["2"]?.stats?.fastest_time_s_plus,
-                        m3: profile?.data?.dungeons?.master_catacombs?.floors["3"]?.stats?.fastest_time_s_plus,
-                        m4: profile?.data?.dungeons?.master_catacombs?.floors["4"]?.stats?.fastest_time_s_plus,
-                        m5: profile?.data?.dungeons?.master_catacombs?.floors["5"]?.stats?.fastest_time_s_plus,
-                        m6: profile?.data?.dungeons?.master_catacombs?.floors["6"]?.stats?.fastest_time_s_plus,
-                        m7: profile?.data?.dungeons?.master_catacombs?.floors["7"]?.stats?.fastest_time_s_plus
+                        m1: profile?.data?.dungeons?.master_catacombs?.floors?.["1"]?.stats?.fastest_time_s_plus,
+                        m2: profile?.data?.dungeons?.master_catacombs?.floors?.["2"]?.stats?.fastest_time_s_plus,
+                        m3: profile?.data?.dungeons?.master_catacombs?.floors?.["3"]?.stats?.fastest_time_s_plus,
+                        m4: profile?.data?.dungeons?.master_catacombs?.floors?.["4"]?.stats?.fastest_time_s_plus,
+                        m5: profile?.data?.dungeons?.master_catacombs?.floors?.["5"]?.stats?.fastest_time_s_plus,
+                        m6: profile?.data?.dungeons?.master_catacombs?.floors?.["6"]?.stats?.fastest_time_s_plus,
+                        m7: profile?.data?.dungeons?.master_catacombs?.floors?.["7"]?.stats?.fastest_time_s_plus
                     },
                 },
                 experience: {

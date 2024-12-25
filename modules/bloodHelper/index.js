@@ -25,7 +25,7 @@ let inDungeon = false;
 let watcherPhase = 0;
 let mobCount = 0
 const entities = {};
-const watcherEntity = null;
+let watcherEntity = null;
 const renderTrigger = register("renderWorld", () => {
 	for (let o of Object.entries(entities)) {
 		let [k, v] = o;

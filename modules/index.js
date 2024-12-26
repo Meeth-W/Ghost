@@ -15,7 +15,7 @@ import slotBinding from "./slotBinding";
 import timers from "./timers";
 
 export const modules = [
-    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP, keyFour, fastLeap, qol, relics
+    slotBinding, bloodHelper, bloodSplits, timers, positionalMessages, dragPrio, partyFinder, ghostBlocks, lowballing, mobESP, keyFour, fastLeap, qol, relics, autoEquip
 ]
 
 export function refresh_modules() {

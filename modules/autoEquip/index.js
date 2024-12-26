@@ -10,7 +10,6 @@ register('command', (...args) => {
 
 const handleAuto = register('chat', (event) => {
     const message = ChatLib.getChatMessage(event, false);
-
     if (message === "Your Phoenix Pet saved you from certain death!") {
         const item = config().equipOnPhoenix;
         if (item) equipmentHelper.swap(item);
@@ -31,7 +30,7 @@ export function toggle() {
         if (config().equipAuto) handleAuto.register();
         return
     }
-
+    handleAuto.unregister();
     return
 }
 export default { toggle };

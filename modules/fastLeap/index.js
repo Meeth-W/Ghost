@@ -1,5 +1,5 @@
 import config from "../../config";
-import { chat, getClasses, getHeldItemID, getPhase, isInBoss, rightClick } from "../../utils/utils";
+import { chat, getClasses, getHeldItemID, getPhase, isInBoss, isInDungeon, rightClick } from "../../utils/utils";
 import leapHelper from '../../utils/leap'
 
 export const MouseEvent = Java.type("net.minecraftforge.client.event.MouseEvent")
@@ -52,6 +52,20 @@ const handleRender = register('renderOverlay', () => {
         Client.Companion.showTitle(" ", `&7Target: &6${leapTo}`, 0, 2, 0)
     }
 }).unregister();
+
+register('command', (arg) => {
+    if (!config().fastLeapToggle || !config().toggleCheat) return chat(`&cCurrently Disabled!`)
+    if (!isInDungeon()) return chat(`&cYou must be in a dungeon!`)
+
+    if (!arg) return chat(`&cUsage: /autoleap <username || class>`)
+    
+    let target;
+    if (arg in ['Mage', 'Berserk', 'Archer', 'Tank', 'Healer']) target = getClasses()[arg];
+    else target = arg;
+
+    if (target && target.toLowerCase() == Player.getName().toLowerCase()) return;
+    leapHelper.autoLeap(arg);
+}).setName('autoleap');
 
 export function toggle() {
     if (config().fastLeapToggle && config().toggle && config().toggleCheat) {

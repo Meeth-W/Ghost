@@ -45,6 +45,13 @@ defConfig
     title: "&6Toggle Slot Binding",
     description: "Decides wether all features in Slot Binding are &aenabled&7/&cdisabled&7."
 })
+.addSwitch({
+    category: "Slot Binding",
+    configName: "slotBindingLock",
+    title: "Lock Slots",
+    description: "Locks all binded slots by preventing left/right clicks on them.",
+    subcategory: "Settings"
+})
 .addDropDown({
     category: "Slot Binding",
     configName: "slotBindingPreset",

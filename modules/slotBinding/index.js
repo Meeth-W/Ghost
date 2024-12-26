@@ -83,6 +83,12 @@ const mainTrigger = register("guiMouseClick", (x, y, mouseButton, gui, event) =>
         cancel(event);
         onShiftClick(slot);
     }
+    if ((mouseButton == 1 || mouseButton == 0) && config().slotBindingLock) {
+        if ((slot < 36 || slot > 44)) { if (!(slot in data.slotBinding.presets[getPreset()])) return} 
+        if (!(slot < 36 || slot > 44)) { if (!(data.slotBinding.history[getPreset()][slot])) return}
+        cancel(event);
+        World.playSound('note.pling', 2, 0.5);
+    }
     return
 }).unregister();
 

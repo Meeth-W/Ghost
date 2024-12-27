@@ -1,7 +1,7 @@
 {
     "name": "§6Ghost",
     "creator": "Ghostyy",
-    "version": "1.0.7",
+    "version": "1.2.1",
     "description": "Dungeons QOL Mod!\nBy Ghostyy (.ghxstyy)",
     "entry": "index.js",
     "requires": [

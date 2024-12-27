@@ -14,6 +14,12 @@ class StarMob {
         this.name = entity.getName();
         this.icon = null;
 
+        this.color = {
+            r: 0,
+            g: 0,
+            b: 0
+        };
+        
         this.update()
     }
     update() {
@@ -37,14 +43,29 @@ const scanMobs = register('tick', () => {
 
         const mob = new StarMob(entity);
         const [_, mobName, specialMob] = match;
+
         let height = 1.9;
+        let color = config().mobESPStarred;
 
         if (!specialMob) {
-            if (/^(?:\w+ )*Fels$/.test(mobName)) height = 2.8;
-            else if (/^(?:\w+ )*Withermancer$/.test(mobName)) height = 2.8;
+            if (/^(?:\w+ )*Fels$/.test(mobName)) {
+                height = 2.8;
+                color = config().mobESPFels;
+            } else if (/^(?:\w+ )*Withermancer$/.test(mobName)) {
+                height = 2.8;
+            }
         }
-        if (/Wither/.test(specialMob)) height = 3;
-        if (/Shadow Assassin/.test(specialMob)) height = 1.8;
+        if (/Wither/.test(specialMob)) {
+            height = 3;
+            color = config().mobESPWithers;
+        }
+
+        if (/Shadow Assassin/.test(specialMob)) {
+            height = 1.8;
+            color = config().mobESPShadowAssassins;
+        }
+
+        mob.color = color;
         mob.height = height;
         
         star.push(mob);
@@ -55,12 +76,12 @@ const scanMobs = register('tick', () => {
 
 const renderESP = register('renderWorld', () => {
     if (!starMobs.length) return;
-    const color = config().mobESPColor;
-    const r = color[0] / 255;
-    const g = color[1] / 255;
-    const b = color[2] / 255;
 
     starMobs.forEach(mob => {
+        const r = mob.color[0]/255;
+        const g = mob.color[1]/255;
+        const b = mob.color[2]/255;
+        
         if (mob.height == 3 || mob.height == 1.8) {
             renderBoxOutline(mob.x, mob.y, mob.z, 0.7, mob.height, r, g, b, 1, 2, true); renderFilledBox(mob.x, mob.y, mob.z, 0.7, mob.height, r, g, b, 0.2, 2, true);
         } else {

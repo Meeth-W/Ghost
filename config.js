@@ -33,8 +33,32 @@ defConfig
 })
 .addColorPicker({
     category: "Mob ESP",
-    configName: "mobESPColor",
-    title: "ESP Color",
+    configName: "mobESPStarred",
+    title: "Starred Mobs",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: ""
+})
+.addColorPicker({
+    category: "Mob ESP",
+    configName: "mobESPShadowAssassins",
+    title: "Shadow Assassins",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: ""
+})
+.addColorPicker({
+    category: "Mob ESP",
+    configName: "mobESPWithers",
+    title: "Withers",
+    value: [255, 255, 255, 255],
+    subcategory: "Colors",
+    description: ""
+})
+.addColorPicker({
+    category: "Mob ESP",
+    configName: "mobESPFels",
+    title: "Fels",
     value: [255, 255, 255, 255],
     subcategory: "Colors",
     description: ""

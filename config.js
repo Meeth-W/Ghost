@@ -259,34 +259,34 @@ defConfig
     description: "Cancels interaction event when clicking on a block while holding pearls.",
     subcategory: "No Interact",
 })
-.addSwitch({
-    category: "Key Four",
-    configName: "keyFour",
-    title: "&6Toggle Key Four &7(&cCheat&7)",
-    description: "Decides wether all features in Key Four are &aenabled&7/&cdisabled&7.",
-})
-.addColorPicker({
-    category: "Key Four",
-    configName: "keyFourColor",
-    title: "Target Color",
-    value: [255, 255, 255, 255],
-    subcategory: "Colors",
-    description: ""
-})
-.addSwitch({
-    category: "Key Four",
-    configName: "keyFourViewMode",
-    title: "Toggle Smooth Look",
-    description: "Smoothly Rotates Between Targets.",
-    subcategory: "Movement",
-})
-.addSwitch({
-    category: "Key Four",
-    configName: "keyFourClickAfter",
-    title: "Shoot After",
-    description: "Right-clicks terminator if held after movement.",
-    subcategory: "Settings",
-})
+// .addSwitch({
+//     category: "Key Four",
+//     configName: "keyFour",
+//     title: "&6Toggle Key Four &7(&cCheat&7)",
+//     description: "Decides wether all features in Key Four are &aenabled&7/&cdisabled&7.",
+// })
+// .addColorPicker({
+//     category: "Key Four",
+//     configName: "keyFourColor",
+//     title: "Target Color",
+//     value: [255, 255, 255, 255],
+//     subcategory: "Colors",
+//     description: ""
+// })
+// .addSwitch({
+//     category: "Key Four",
+//     configName: "keyFourViewMode",
+//     title: "Toggle Smooth Look",
+//     description: "Smoothly Rotates Between Targets.",
+//     subcategory: "Movement",
+// })
+// .addSwitch({
+//     category: "Key Four",
+//     configName: "keyFourClickAfter",
+//     title: "Shoot After",
+//     description: "Right-clicks terminator if held after movement.",
+//     subcategory: "Settings",
+// })
 .addSwitch({
     category: "Blood Helper",
     configName: "bloodHelperToggle",

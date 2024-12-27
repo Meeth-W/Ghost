@@ -26,7 +26,7 @@ function onGKey() {
     leftClick();
 }
 const handleGKey = register('tick', () => {
-    if (!Keyboard.isKeyDown(config().qolGKeyBind) || gKeyCooldown || Client.isInChat() || Client.isInGui()) return;
+    if (!Keyboard.isKeyDown(config().qolGKeyBind) || gKeyCooldown || Client.isInChat() || Client.isInGui() || !config().qolGKey) return;
     onGKey()
     gKeyCooldown = true
     setTimeout(() => { gKeyCooldown = false }, 200);
